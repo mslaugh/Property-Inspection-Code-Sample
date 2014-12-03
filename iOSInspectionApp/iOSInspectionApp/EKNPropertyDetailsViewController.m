@@ -857,7 +857,7 @@
             NSString *inspectionId = [NSString stringWithFormat:@"%@",[tempitem getData:@"ID"]];
             
             NSDictionary * pdic = (NSDictionary *)[tempitem getData:@"sl_propertyID"];
-            NSDictionary *insdic =(NSDictionary *)[tempitem getData:@"sl_inspector"];
+           // NSDictionary *insdic =(NSDictionary *)[tempitem getData:@"sl_inspector"];
             
             if(pdic!=nil)
             {
@@ -867,9 +867,10 @@
                     NSMutableDictionary * inspectionItem= [[NSMutableDictionary alloc] init];
                     
                     [inspectionItem setObject:inspectionId forKey:@"ID"];
-                    [inspectionItem setObject:[insdic objectForKey:@"Title"] forKey:@"sl_accountname"];
+                    [inspectionItem setObject:[tempitem getData:@"sl_inspector"] forKey:@"sl_accountname"];
                     
-                    if ([[insdic objectForKey:@"sl_accountname"] isEqualToString:self.loginName ])
+                    //here sl_emailaddress
+                    if ([(NSString *)[tempitem getData:@"sl_emailaddress"] isEqualToString:self.loginName ])
                     {
                         [inspectionItem setObject:@"YES" forKey:@"bowner"];
                     }
@@ -1277,7 +1278,7 @@
 -(void)loadPropertyData{
     [self startPropertyViewSpiner:CGRectMake(380+250,140+300,50,50)];
     
-   [self.listClient getListItemsByFilter:@"Inspections" filter:@"$select=ID,sl_datetime,sl_finalized,sl_inspector/ID,sl_inspector/Title,sl_inspector/sl_accountname,sl_propertyID/ID,sl_propertyID/Title,sl_propertyID/sl_owner,sl_propertyID/sl_address1,sl_propertyID/sl_emailaddress&$expand=sl_inspector,sl_propertyID&$orderby=sl_datetime%20desc" callback:^(NSMutableArray *listItems, NSError *error) {
+   [self.listClient getListItemsByFilter:@"Inspections" filter:@"$select=ID,sl_datetime,sl_finalized,sl_inspector,sl_emailaddress,sl_propertyID/ID,sl_propertyID/Title,sl_propertyID/sl_owner,sl_propertyID/sl_address1,sl_propertyID/sl_emailaddress&$expand=sl_propertyID&$orderby=sl_datetime%20desc" callback:^(NSMutableArray *listItems, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             
             if(nil!=listItems && [listItems count]>0)
@@ -1288,36 +1289,6 @@
                 
                 for(ListItem* tempitem in listItems)
                 {
-                    /*NSDictionary * pdic = (NSDictionary *)[tempitem getData:@"sl_propertyID"];
-                     EKNPropertyData* pdata = nil;
-                     EKNInspectorData *indata = nil;
-                     if(pdic!=nil)
-                     {
-                     pdata = [[EKNPropertyData alloc] init];
-                     [pdata initParameter:(NSString *)[pdic objectForKey:@"ID"]
-                     Title:(NSString *)[pdic objectForKey:@"Title"]
-                     Owner:(NSString *)[pdic objectForKey:@"sl_owner"]
-                     Adress1:(NSString *)[pdic objectForKey:@"sl_address1"]
-                     Adress2:(NSString *)[pdic objectForKey:@"sl_address2"]
-                     City:(NSString *)[pdic objectForKey:@"sl_city"]
-                     State:(NSString *)[pdic objectForKey:@"sl_state"]
-                     PostalCode:(NSString *)[pdic objectForKey:@"sl_postalCode"]];
-                     }
-                     NSDictionary * indic = (NSDictionary *)[tempitem getData:@"sl_inspector"];
-                     if(indic!=nil)
-                     {
-                     indata = [[EKNInspectorData alloc] init];
-                     [indata initParameter:(NSString *)[indic objectForKey:@"ID"]
-                     InspectorTitle:(NSString *)[indic objectForKey:@"Title"]
-                     InspectorAccountName:(NSString *)[indic objectForKey:@"sl_accountname"]
-                     InspectorEmailAdress:(NSString *)[indic objectForKey:@"sl_emailaddress"]];
-                     }
-                     EKNInspectionData * inspectionItem = [[EKNInspectionData alloc] init];
-                     [inspectionItem initParameter:(NSString *)[tempitem getData:@"ID"]
-                     InspectionTitle:(NSString *)[tempitem getData:@"Title"]
-                     InspectionDateTime:(NSString *)[tempitem getData:@"sl_datetime"]
-                     InspectorData:indata
-                     PropertyData:pdata];*/
                     BOOL bAdded = NO;
                     NSDictionary * pdic = (NSDictionary *)[tempitem getData:@"sl_propertyID"];
                     NSString *pid=[NSString stringWithFormat:@"%@",[pdic objectForKey:@"ID"]];
@@ -1325,8 +1296,7 @@
                     
                     if(pdic!=nil)
                     {
-                        if([pid intValue] == [self.selectRightPropertyItemId intValue]
-                          /* && [EKNEKNGlobalInfo isEqualTodayDate:tempdatetime]*/)
+                        if([pid intValue] == [self.selectRightPropertyItemId intValue])
                         {
                             BOOL bexist =NO;
                             for (ListItem * tt in currentList) {
@@ -2885,14 +2855,14 @@
         NSDictionary *pro = (NSDictionary *)[inspectionitem getData:@"sl_propertyID"];
         self.selectRightPropertyItemId =[NSString stringWithFormat:@"%@",[pro objectForKey:@"ID"]];
         
-        NSDictionary *insdic = (NSDictionary *)[inspectionitem getData:@"sl_inspector"];
+        //NSDictionary *insdic = (NSDictionary *)[inspectionitem getData:@"sl_inspector"];
         NSMutableDictionary *propertydic=[self getSelectPropertyDic];
         if(propertydic == nil)
         {
             propertydic = [[NSMutableDictionary alloc] init];
             [self.propertyDic setObject:propertydic forKey:self.selectRightPropertyItemId];
         }
-        [propertydic setObject:[insdic objectForKey:@"sl_accountname"] forKey:@"contactowner"];
+        [propertydic setObject:[inspectionitem getData:@"sl_inspector"] forKey:@"contactowner"];
         [propertydic setObject:[pro objectForKey:@"sl_emailaddress"] forKey:@"contactemail"];
     }
     
