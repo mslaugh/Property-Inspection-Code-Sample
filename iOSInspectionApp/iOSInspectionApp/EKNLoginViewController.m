@@ -229,9 +229,9 @@
                           else
                           {
                               NSString *token = result.accessToken;
-                              NSString *userId = result.tokenCacheStoreItem.userInformation.userId;
-                              NSArray *userIdArray = [userId componentsSeparatedByString:@"@"];
-                              NSString *loginName = [userIdArray objectAtIndex:0];
+                           //   NSString *userId = result.tokenCacheStoreItem.userInformation.userId;
+                             // NSArray *userIdArray = [userId componentsSeparatedByString:@"@"];
+                              NSString *loginName = result.tokenCacheStoreItem.userInformation.userId;//[userIdArray objectAtIndex:0];
                               //will retry to get email token
                               [context acquireTokenWithResource:@"https://outlook.office365.com"
                                                            clientId:self.clientId
