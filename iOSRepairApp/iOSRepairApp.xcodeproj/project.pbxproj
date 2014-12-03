@@ -13,6 +13,7 @@
 		0EC85AEC1A2ED8FD009A1593 /* libPods-ADALiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EC85AE91A2ED8FD009A1593 /* libPods-ADALiOS.a */; };
 		0EC85AED1A2ED8FD009A1593 /* libPods-Office365.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EC85AEA1A2ED8FD009A1593 /* libPods-Office365.a */; };
 		0EC85AEE1A2ED8FD009A1593 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EC85AEB1A2ED8FD009A1593 /* libPods.a */; };
+		0EC85AF21A2F0963009A1593 /* EKNExchange.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC85AF11A2F0963009A1593 /* EKNExchange.m */; };
 		F31EFD9719FF895A005B04BD /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = F31EFD9619FF895A005B04BD /* BaseController.m */; };
 		F37943E819FA2B5E00FDD9A3 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F37943E719FA2B5E00FDD9A3 /* Settings.bundle */; };
 		F37943F019FA2B7100FDD9A3 /* ADAL_iPad_Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F37943E919FA2B7100FDD9A3 /* ADAL_iPad_Storyboard.storyboard */; };
@@ -83,6 +84,8 @@
 		0EC85AE91A2ED8FD009A1593 /* libPods-ADALiOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-ADALiOS.a"; path = "Pods/build/Debug-iphoneos/libPods-ADALiOS.a"; sourceTree = "<group>"; };
 		0EC85AEA1A2ED8FD009A1593 /* libPods-Office365.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Office365.a"; path = "Pods/build/Debug-iphoneos/libPods-Office365.a"; sourceTree = "<group>"; };
 		0EC85AEB1A2ED8FD009A1593 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		0EC85AF01A2F0963009A1593 /* EKNExchange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EKNExchange.h; path = iOSRepairApp/EKNExchange.h; sourceTree = SOURCE_ROOT; };
+		0EC85AF11A2F0963009A1593 /* EKNExchange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EKNExchange.m; path = iOSRepairApp/EKNExchange.m; sourceTree = SOURCE_ROOT; };
 		240C36C39ECF3AAD30CC417B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		481833CFFB1FA410AE17FCD2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		4FDDCC949506D0ED88D9A210 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -263,6 +266,7 @@
 		0EC4F5BF19CFF2C600BEF583 /* iOSRepairApp */ = {
 			isa = PBXGroup;
 			children = (
+				0EC85AEF1A2F08E9009A1593 /* Exchange */,
 				F379443019FA2DCC00FDD9A3 /* Images.xcassets */,
 				F379442719FA2DAA00FDD9A3 /* EKNAppDelegate.h */,
 				F379442819FA2DAA00FDD9A3 /* EKNAppDelegate.m */,
@@ -291,6 +295,15 @@
 				F379443219FA2DF200FDD9A3 /* Images */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0EC85AEF1A2F08E9009A1593 /* Exchange */ = {
+			isa = PBXGroup;
+			children = (
+				0EC85AF01A2F0963009A1593 /* EKNExchange.h */,
+				0EC85AF11A2F0963009A1593 /* EKNExchange.m */,
+			);
+			name = Exchange;
 			sourceTree = "<group>";
 		};
 		C91E61786CFC154A0EC3C523 /* Pods */ = {
@@ -526,6 +539,7 @@
 				F379442619FA2D8E00FDD9A3 /* EKNListItem.m in Sources */,
 				F379440719FA2CA000FDD9A3 /* PropertyDetailsCell.m in Sources */,
 				F379442019FA2D7900FDD9A3 /* EKN+UIViewController.m in Sources */,
+				0EC85AF21A2F0963009A1593 /* EKNExchange.m in Sources */,
 				F37943FD19FA2C6200FDD9A3 /* IncidentListItemCell.m in Sources */,
 				F379442E19FA2DAA00FDD9A3 /* EKNEKNGlobalInfo.m in Sources */,
 				F379442F19FA2DAA00FDD9A3 /* EKNLoginViewController.m in Sources */,

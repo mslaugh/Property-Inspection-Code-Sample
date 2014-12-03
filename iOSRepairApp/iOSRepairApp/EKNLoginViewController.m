@@ -231,19 +231,29 @@
         
         if(token != nil)
         {
-            token = token;
-            EKNIncidentViewController *incident = [[EKNIncidentViewController alloc] init];
-            incident.token = token;
-            if(self.incidentId == nil || (NSNull *)self.incidentId == [NSNull null])
-            {
-                incident.incidentId = @"1";
-            }
-            else
-            {
-                incident.incidentId = self.incidentId;
-            }
+            //token = token;
             
-            [self.navigationController pushViewController:incident animated:YES];
+            [self getExchangeToken:^(NSString * emailtoken, bool bsuccess) {
+                if(bsuccess)
+                {
+                    EKNIncidentViewController *incident = [[EKNIncidentViewController alloc] init];
+                    incident.token = token;
+                    incident.exchangetoken = emailtoken;
+                    
+                    if(self.incidentId == nil || (NSNull *)self.incidentId == [NSNull null])
+                    {
+                        incident.incidentId = @"1";
+                    }
+                    else
+                    {
+                        incident.incidentId = self.incidentId;
+                    }
+                    
+                    [self.navigationController pushViewController:incident animated:YES];
+                }
+            }];
+            
+
         }
     }];
     
@@ -290,7 +300,31 @@
                       }];
      */
 }
-
+-(void) getExchangeToken:(void (^) (NSString *, bool))completionBlock
+{
+    ADAuthenticationError *error;
+    ADAuthenticationContext* context = [ADAuthenticationContext authenticationContextWithAuthority:self.authority error:&error];
+    if (!context)
+    {
+        [self showError:@"Context is Null."];
+    }
+    [context acquireTokenWithResource:@"https://outlook.office365.com"
+                             clientId:self.clientId
+                          redirectUri:[NSURL URLWithString:self.redirectUriString]
+                      completionBlock:^(ADAuthenticationResult  *result) {
+                          
+                          if (AD_SUCCEEDED != result.status){
+                              [self showError:result.error.errorDetails];
+                              
+                              return;
+                          }
+                          else{
+                              completionBlock(result.accessToken,YES);
+                          }
+                          
+                      }];
+    
+}
 -(void) getTokenWith :(BOOL) clearCache completionHandler:(void (^) (NSString *))completionBlock;
 {
     if([self getCacheToken : self.resourceId completionHandler:completionBlock]) return;

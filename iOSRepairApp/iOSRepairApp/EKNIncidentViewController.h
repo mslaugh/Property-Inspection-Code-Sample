@@ -26,6 +26,7 @@
 @property(nonatomic) EKNListClient *client;
 @property(nonatomic) NSString* loginName;
 @property(nonatomic) NSString* token;
+@property(nonatomic) NSString* exchangetoken;
 @property(nonatomic) NSString* siteUrl;
 @property(nonatomic) NSString* incidentId;
 @property(nonatomic) NSString* selectPropertyId;

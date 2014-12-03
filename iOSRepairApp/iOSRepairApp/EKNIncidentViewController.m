@@ -8,6 +8,7 @@
 
 #import "EKNIncidentViewController.h"
 #import "BaseController.h"
+#import "EKNExchange.h"
 
 @interface EKNIncidentViewController ()
 
@@ -665,7 +666,7 @@
                 EKNListItem *item = listItems[0];
                 NSDictionary *property = (NSDictionary *)[item getData:@"sl_propertyID"];
                 self.propertyDetailDic = property;
-                
+             //   [self sendExchangeEmailAfterRepair];
                 [self.propertyDetailTableView reloadData];
                 [self.contactOwnerTableView reloadData];
                 [self.contactOfficeTableView reloadData];
@@ -752,6 +753,7 @@
                     [self hideLoading];
                     [self updateRightTableCell:self.selectedIndexPath];
                     [self showSuccessMessage:@"Finalize repair successfully."];
+                    [self sendExchangeEmailAfterRepair];
                 }
                 else
                 {
@@ -767,7 +769,41 @@
     }];
     [task resume];
 }
-
+//after create an new incident item, we will send a email using exchage
+-(void)sendExchangeEmailAfterRepair
+{
+    NSString *to = [EKNEKNGlobalInfo getString:[self.propertyDetailDic objectForKey:@"sl_emailaddress"]];
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *cc = [standardUserDefaults objectForKey:@"dispatcherEmail"];
+    
+    NSString *propertyName = [EKNEKNGlobalInfo getString:[self.propertyDetailDic objectForKey:@"Title"]];
+    NSString *propertyAddress = [EKNEKNGlobalInfo getString:[self.propertyDetailDic objectForKey:@"sl_address1"]];
+    NSMutableDictionary *emailDataDic = [[NSMutableDictionary alloc] init];
+    NSString *currentDate = [EKNEKNGlobalInfo converStringFromDate:[NSDate date]];
+    NSMutableString *body =[[NSMutableString alloc] initWithString:@"\r\nDuring a recent repair on your property an incident was reported.\r\n"];
+    [body appendFormat:@"\r\n\r\nProperty Name: %@\r\nProperty Address: %@\r\n\r\nRepair Date: <%@>\r\n\r\n",propertyName,propertyAddress,currentDate];
+    
+    
+    [emailDataDic setObject:[NSString stringWithFormat:@"Repair Report - <%@> - <%@>",propertyName,currentDate] forKey:@"subject"];
+    [emailDataDic setObject:to forKey:@"to"];
+    [emailDataDic setObject:cc forKey:@"cc"];
+    [emailDataDic setObject:body forKey:@"body"];
+    [emailDataDic setObject:self.exchangetoken forKey:@"exchangetoken"];
+    EKNExchange *ex = [[EKNExchange alloc] init];
+    [ex sendMailUsingExchange:emailDataDic callback:^(int returnValue, NSError *error)
+     {
+         // NSLog(@" send email error %@,%d",error,returnValue);
+         if (error ==nil) {
+             //
+             NSLog(@"Send email success.");
+         }
+         else
+         {
+             //
+             NSLog(@"Send email failed.");
+         }
+     }];
+}
 - (void)updateIncidentWorkflowTask
 {
     NSString *requestUrl = [NSString stringWithFormat:@"%@/_api/web/lists/GetByTitle('%@')/Items(%@)",self.siteUrl,@"Incident%20Workflow%20Tasks",self.selectTaskId];
@@ -795,6 +831,7 @@
                 self.tabComments.editable = NO;
                 [self updateRightTableCell:self.selectedIndexPath];
                 [self showSuccessMessage:@"Finalize repair successfully."];
+                 [self sendExchangeEmailAfterRepair];
             }
             else
             {
