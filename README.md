@@ -11,7 +11,6 @@
 - [Mail App for Office Notes](#mailafo)
 - [Links that open native iOS Apps Notes](#deeplinks)
 - [Working with the iOS apps in XCode](#xcode)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Overview
@@ -74,27 +73,37 @@ The sections below provide more information about these components and how to ge
 ## Install-MyApp
 To set up and configure the demo first download the Property Manager My App and open it in Visual Studio 2013.
 
-To register the Property Manager My App with your Azure Active Directory right click the PropertyManagerMyApp project and select Add -> Connected Service.  Authenticate with the credentials associated with your tenancy and use the wizard to configure the appropriate permissions.  The following images demonstrate how your app settings and api permissions should be configured for the Property Manager My App to work.
+To register the Property Manager My App with your Azure Active Directory follow these steps.
 
-O365 API Calendar Permissions
+1. Right click the **PropertyManagerMyApp project** and select **Add -> Connected Service**.  
+2. Authenticate with the administrator credentials associated with your tenancy.
+3. Use the wizard to configure the appropriate O365 permissions.
+  
+	The following images demonstrate how your app settings and api permissions should be configured for the Property Manager My App to work.
+	
+	O365 API Calendar Permissions
+	
+	![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/O365 API Calendar Permissions.jpg)
+	
+	O365 API Mail Permissions
+	
+	![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/O365 API Mail Permissions.jpg)
+	
+	O365 API Sites Permissions
+	
+	![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/O365 API Sites Permissions.jpg)
+	
+	O365 API AD Permissions
+	
+	![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/O365 API AD Permissions.jpg)
+	
+	O365 App Settings
+	
+	![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/O365 App Settings.jpg)
 
-![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/O365 API Calendar Permissions.jpg)
+4. Click **OK** in the Add Connected Services wizard to commit the changes.  
 
-O365 API Mail Permissions
-
-![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/O365 API Mail Permissions.jpg)
-
-O365 API Sites Permissions
-
-![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/O365 API Sites Permissions.jpg)
-
-O365 API AD Permissions
-
-![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/O365 API AD Permissions.jpg)
-
-O365 App Settings
-
-![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/O365 App Settings.jpg)
+At this point VS will add the appropriate O365 Nuget packages to the Visual Studio Solution.
 
 **web.config**
 The Property Manager My App stores configuration settings in the web.config file.  These settings must be configured for your environment in order for the Property Manager My App to work.  The Add Connected Service wizard creates some of these settings in the web.config file when it registers you app with Azure Active Directory.  These settings the Add Connected Service wizard creates include:
@@ -117,6 +126,10 @@ In addition to the settings above, other settings exist which allow you to perfo
 - **DispatcherEmail** Email address for Dispatcher (katiej&#64;&lt;Your Tenancy&gt;.onmicrosoft.com)
 
 Configure these settings in the web.config file to match your O365 / Azure Tenancy.
+
+Finally, add the following setting to your web.config file.
+
+&lt;add key="ida:GraphResourceId" value="https://graph.windows.net/" /&gt;
 
 **Azure Active Directory User Accounts**
 The Property Manager My App and demo rely on Azure Active Directory Accounts to work.  Create the following users in Azure Active Directory.  Note: It may take up to 24 hours for the O365 infrastructure to create an Exchange Mailbox and Calendar.
@@ -161,22 +174,57 @@ These files contain the code which implements the Site Collection provisioning f
 
 After you have performed the configuration steps described above, provision the Site Collection and content.
 
-In Visual Studio, **press F5** to run the project.  
+In Visual Studio, **press F5** to run the project. Ignore any errors which appear, they are due to the fact the Site Collection has not been provisioned yet. 
 
-In your web browser, navigate to **http://localhost:41322/O365SiteProvisioning** to invoke the O365SiteProvisioning controller and create the Site Collection and content.
+In your web browser, navigate to **http://localhost:41322/O365SiteProvisioning** to invoke the O365SiteProvisioning controller and create the Site Collection and information architecture.
+
+When the process completes you will see this screen:
+
+![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/sc provision success.jpg)
+
+Next, click the **Create Sample Data** link in the top menu.  Then, click the **Populate** button.
+
+When the process completes you will see this screen:
+
+![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/content provision success.jpg)
+
+If you navigate to the Site Contents page in the Site Collection you will see all the new lists and libraries and sample content.
+
+Use this URL to access the Site Contents page:
+
+https://**&lt;Your Tenancy&gt;**.sharepoint.com/sites/SuiteLevelAppDemo/_layouts/15/viewlsts.aspx
+
+
+Next, click the **Provision Workflow** link in the top menu.  Then, click the **Populate** button.
+
+When the process completes you will see this screen:
+
+![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/workflow provision success.jpg)
+
+If you navigate to the Site Contents page in the Site Collection you will see the new Workflow History and Workflow Tasks lists.
+
+Use this URL to access the Site Contents page:
+
+https://**&lt;Your Tenancy&gt;**.sharepoint.com/sites/SuiteLevelAppDemo/_layouts/15/viewlsts.aspx
 
 **User Account Permission**
-After you have provisioned the Site Collection and content you must grant Member access to the Dispatcher account.
+After you have provisioned the Site Collection and content you must grant Member access to the Inspector, Dispatcher, and Repair People accounts.
 
+- Inspector: Rob Barker alias: robb
 - Dispatcher: Katie Jordan alias: katiej
+- Repair Person: Ron Gabel alias: rong
+- Inspector: Alisa Lawyer alias: alisal
+- Repair Person: Chris Gray alias: chrisg
 
 **Property Manager My App Configuration**
-If you wish to add a custom logo to your Property Manager My App you can update the logo corresponding to the AAD App Visual Studio creates in your AAD.  Use the following file you can find in the PropertyManagementMyApp Visual Studio Solution.  **/Content/Images/AADAppLogos/logo-prop-man.jpg**
+This is steps is optional.  If you wish to add a custom logo to your Property Manager My App you can update the logo corresponding to the AAD App Visual Studio creates in your AAD.  Use the following file you can find in the PropertyManagementMyApp Visual Studio Solution.  **/Content/Images/AADAppLogos/logo-prop-man.jpg**
 
 **Property Manager My App Installation Complete!**
-Now you can access the Property Manager My App dashboard landing page.
+Now you can access the Property Manager My App dashboard landing page by clicking the **Property Management Dashboard** link in the top menu.  You can also access the dashboard by navigating to **http://localhost:44312/Dashboard** in your web browser.  
 
-In your web browser, navigate to **http://localhost:44312/Dashboard** to open the dashboard landing page.
+This is what the dashboard looks like.  In this screenshot, the Past Inspections tab is selected.
+
+![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/dashboard.jpg)
 
 ## Install-iOS
 
@@ -225,12 +273,13 @@ After the iOS Apps are deployed, you need to configure them to work with an O365
 
 To configure the iPad Apps settings follow these instructions.  You need to perform these same steps for both the Inspection and Repair iOS apps.
 
-1. Tap the **iPad App** on the iPad to open it.After the iPad App is loaded and the Sign In screen is displayed, push the **home button** two times and close the running instance of the application.
-2. Next, open the **native iOS Settings App**.
-3. In the left column, tap the **name of the app**.
-4. Enter the values which correspond to the Azure Active Directory application you created for the iPad Apps.
-5. Enter the URL to the Site Collection created by the Property Manager My App.
-6. Enter the email address for the Dispatcher. (katiej&#64;&lt;Your Tenancy&gt;.onmicrosoft.com)
+1. Tap the **iPad App** on the iPad to open it.
+2. After the iPad App is loaded and the Sign In screen is displayed, push the **home button** two times and close/terminate the running instance of the application.
+3. Next, open the **native iOS Settings App**.
+4. In the left column, tap the **name of the app**.
+5. Enter the values which correspond to the Azure Active Directory application you created for the iPad Apps.
+6. Enter the URL to the Site Collection created by the Property Manager My App.
+7. Enter the email address for the Dispatcher. (katiej&#64;&lt;Your Tenancy&gt;.onmicrosoft.com)
 
 These are the values that must be configured.
 
@@ -253,12 +302,14 @@ The Mail App for Office runs on an ASP.NET Web site.  You must configure the Mai
 
 **Modify Manifest**
 
-1. Open the **MailAFO Visual Studio Solution**
-2. In the MailAFO project, open the **MailAFO.xml** file
+1. Open the **MailApp Visual Studio Solution**
+2. In the MailApp project, open the **MailApp.xml** file
 3. Replace the **SourceLocation endpoints** in the DesktopSettings, TabletSettings, and PhoneSettings nodes with the URL to your Property Manager My App ASP.NET web site
 
 	Use the following template for the SoureLocation URL:
 	**https://&lt;Your Web Site&gt;.azurewebsites.net/Mailafo/redir**
+
+	**Note:** You must use an HTTPS URL for Mail Apps for Office.
 4. Save **MailApp.xml**
 5. Right click the MailApp project and select **Publish**
 6. Click **Package the app**        
@@ -305,7 +356,7 @@ The Mail App for Office included in the demo renders properly in PC web browsers
 The links in the workflow emails which open the native iOS apps on an iOS device work when using the native iOS email client.  At this time they are not supported in Safari or the OWA app.
 
 ## XCode
-In the iOSInspectionApp and iOSRepairApp folder you will find runnable sample code for iOS Apps which use Outlook Services (aka Exchange), Files Services (aka Drive), and the Discovery Service.
+In the iOSInspectionApp and iOSRepairApp folder you will find runnable sample code for iOS Apps which the O365 APIs.
 
 The samples utilize Cocoapods to configure both the Office365 SDKs and ADAL.
 
@@ -318,10 +369,7 @@ Here's how to run these samples.  You need to perform these steps for both the I
 
 > For more info on Cocoapods setup see the Office 365 SDK for iOS [wiki](https://github.com/OfficeDev/Office-365-SDK-for-iOS/wiki/Cocoapods-Setup) and [their site](http://cocoapods.org).
 
-## Contributing
-You will need to sign a [Contributor License Agreement](https://cla.msopentech.com/) before submitting your pull request. To complete the Contributor License Agreement (CLA), you will need to submit a request via the form and then electronically sign the Contributor License Agreement when you receive the email containing the link to the document. This needs to only be done once for any Microsoft Open Technologies OSS project.
-
 ## License
-Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. Licensed under the Apache License, Version 2.0.
+Copyright (c) Microsoft, Inc. All rights reserved. Licensed under the Apache License, Version 2.0.
 
 
