@@ -194,19 +194,19 @@ Use this URL to access the Site Contents page:
 
 https://**&lt;Your Tenancy&gt;**.sharepoint.com/sites/SuiteLevelAppDemo/_layouts/15/viewlsts.aspx
 
-Next, click the **Create Sample Data** link in the top menu.  Then, click the **Populate** button.
+In your web browser, navigate to **http://localhost:41322/O365SiteProvisioning/CreateDemoData** to open the sample data provisioning form.
+
+Enter the date when you plan to execute the demo, then click the **Populate** button.
 
 When the process completes you will see this screen:
 
+![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/demo data provision success.jpg)
 
-
-If you navigate to the Site Contents page in the Site Collection you will see all the new lists and libraries and sample content.
+If you navigate to the Site Contents page in the Site Collection you will see the lists and libraries which indicate they just had sample data added to them.
 
 Use this URL to access the Site Contents page:
 
 https://**&lt;Your Tenancy&gt;**.sharepoint.com/sites/SuiteLevelAppDemo/_layouts/15/viewlsts.aspx
-
-
 
 **User Account Permission**
 After you have provisioned the Site Collection and content you must grant Member access to the Inspector, Dispatcher, and Repair People accounts.
