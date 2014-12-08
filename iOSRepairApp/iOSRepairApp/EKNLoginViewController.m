@@ -253,51 +253,51 @@
                 }
             }];
             
-
+            
         }
     }];
     
     /*
-    ADAuthenticationError *error;
-    ADAuthenticationContext* context = [ADAuthenticationContext authenticationContextWithAuthority:self.authority error:&error];
-    if (!context)
-    {
-        return;
-    }
-    
-    [context acquireTokenWithResource:self.resourceId
-                             clientId:self.clientId
-                          redirectUri:[NSURL URLWithString:self.redirectUriString]
-                      completionBlock:^(ADAuthenticationResult *result) {
-                          
-                          [spinner stopAnimating];
-                          [spinner removeFromSuperview];
-                          
-                          if (result.status != AD_SUCCEEDED)
-                          {
-                              NSString *errorMessage = [@"Login failed. Reason: " stringByAppendingString: result.error.errorDetails];
-                              UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:errorMessage delegate:self cancelButtonTitle:@"Retry" otherButtonTitles:@"Cancel", nil];
-                              [alert show];
-                              
-                              return;
-                          }
-                          else
-                          {
-                              self.token = result.accessToken;
-                              EKNIncidentViewController *incident = [[EKNIncidentViewController alloc] init];
-                              incident.token = self.token;
-                              if(self.incidentId == nil || (NSNull *)self.incidentId == [NSNull null])
-                              {
-                                  incident.incidentId = @"1";
-                              }
-                              else
-                              {
-                                  incident.incidentId = self.incidentId;
-                              }
-                              
-                              [self.navigationController pushViewController:incident animated:YES];
-                          }
-                      }];
+     ADAuthenticationError *error;
+     ADAuthenticationContext* context = [ADAuthenticationContext authenticationContextWithAuthority:self.authority error:&error];
+     if (!context)
+     {
+     return;
+     }
+     
+     [context acquireTokenWithResource:self.resourceId
+     clientId:self.clientId
+     redirectUri:[NSURL URLWithString:self.redirectUriString]
+     completionBlock:^(ADAuthenticationResult *result) {
+     
+     [spinner stopAnimating];
+     [spinner removeFromSuperview];
+     
+     if (result.status != AD_SUCCEEDED)
+     {
+     NSString *errorMessage = [@"Login failed. Reason: " stringByAppendingString: result.error.errorDetails];
+     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:errorMessage delegate:self cancelButtonTitle:@"Retry" otherButtonTitles:@"Cancel", nil];
+     [alert show];
+     
+     return;
+     }
+     else
+     {
+     self.token = result.accessToken;
+     EKNIncidentViewController *incident = [[EKNIncidentViewController alloc] init];
+     incident.token = self.token;
+     if(self.incidentId == nil || (NSNull *)self.incidentId == [NSNull null])
+     {
+     incident.incidentId = @"1";
+     }
+     else
+     {
+     incident.incidentId = self.incidentId;
+     }
+     
+     [self.navigationController pushViewController:incident animated:YES];
+     }
+     }];
      */
 }
 -(void) getExchangeToken:(void (^) (NSString *, bool))completionBlock

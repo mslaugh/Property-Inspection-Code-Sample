@@ -666,7 +666,7 @@
                 EKNListItem *item = listItems[0];
                 NSDictionary *property = (NSDictionary *)[item getData:@"sl_propertyID"];
                 self.propertyDetailDic = property;
-             //   [self sendExchangeEmailAfterRepair];
+                //   [self sendExchangeEmailAfterRepair];
                 [self.propertyDetailTableView reloadData];
                 [self.contactOwnerTableView reloadData];
                 [self.contactOfficeTableView reloadData];
@@ -831,7 +831,7 @@
                 self.tabComments.editable = NO;
                 [self updateRightTableCell:self.selectedIndexPath];
                 [self showSuccessMessage:@"Finalize repair successfully."];
-                 [self sendExchangeEmailAfterRepair];
+                [self sendExchangeEmailAfterRepair];
             }
             else
             {
