@@ -846,7 +846,7 @@
 {
     [self showLoading];
     
-    NSString *filter = [NSString stringWithFormat:@"$select=Id,sl_datetime,sl_inspector/Title,sl_inspector/sl_emailaddress&$expand=sl_inspector&$filter=Id eq %@&$orderby=sl_datetime desc&$top=1",inspectionID];
+    NSString *filter = [NSString stringWithFormat:@"$select=Id,sl_datetime,sl_inspector,sl_emailaddress&$filter=Id eq %@&$orderby=sl_datetime desc&$top=1",inspectionID];
     NSString *filterStr = [filter stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     
     [self.client getListItemsByFilter:@"Inspections" filter:filterStr callback:^(NSMutableArray *listItems, NSError *error) {
@@ -854,9 +854,9 @@
             if(listItems != nil && [listItems count] > 0)
             {
                 EKNListItem *item = listItems[0];
-                NSDictionary *inspector = (NSDictionary *)[item getData:@"sl_inspector"];
-                [self.inspectionDetailDic setObject:[inspector objectForKey:@"Title"] forKey:@"name"];
-                [self.inspectionDetailDic setObject:[inspector objectForKey:@"sl_emailaddress"] forKey:@"email"];
+                //NSDictionary *inspector = (NSDictionary *)[item getData:@"sl_inspector"];
+                [self.inspectionDetailDic setObject:[item getData:@"sl_inspector"] forKey:@"name"];
+                [self.inspectionDetailDic setObject:[item getData:@"sl_emailaddress"] forKey:@"email"];
                 [self.inspectionDetailDic setObject:[item getData:@"sl_datetime"] forKey:@"date"];
                 [self.detailInspectionDetailTableView reloadData];
             }

@@ -66,7 +66,7 @@
     else
     {
         settingsMissing = 1;
-        self.clientId = @"9e57784a-6f56-4120-9d57-1c37c26dba61";
+        self.clientId = @"6673496e-ae58-4c53-a888-d3b08f54b20d";
         [standardUserDefaults setValue:self.clientId  forKey:@"clientId"];
         [standardUserDefaults synchronize];
     }
@@ -92,7 +92,7 @@
     else
     {
         settingsMissing = 1;
-        self.resourceId = @"https://teeudev3.sharepoint.com";
+        self.resourceId = @"https://cd1.sharepoint.com";
         [standardUserDefaults setValue:self.resourceId forKey:@"resourceId"];
         [standardUserDefaults synchronize];
     }
@@ -105,7 +105,7 @@
     else
     {
         settingsMissing = 1;
-        self.redirectUriString = @"http://PropertyManagementiOSiPadApp" ;
+        self.redirectUriString = @"http://PropertyManagementiOSiPadApp";
         [standardUserDefaults setValue:self.redirectUriString forKey:@"redirectUriString"];
         [standardUserDefaults synchronize];
     }
@@ -114,7 +114,7 @@
     if (nil == [standardUserDefaults objectForKey:@"demoSiteCollectionUrl"])
     {
         settingsMissing = 1;
-        [standardUserDefaults setValue:@"https://teeudev3.sharepoint.com/sites/SuiteLevelAppDemo" forKey:@"demoSiteCollectionUrl"];
+        [standardUserDefaults setValue:@"https://cd1.sharepoint.com/sites/SuiteLevelAppDemo" forKey:@"demoSiteCollectionUrl"];
         [standardUserDefaults synchronize];
     }
     
@@ -122,7 +122,7 @@
     if (nil == [standardUserDefaults objectForKey:@"dispatcherEmail"])
     {
         settingsMissing = 1;
-        [standardUserDefaults setValue:@"katiej@TEEUdev3.onmicrosoft.com" forKey:@"dispatcherEmail"];
+        [standardUserDefaults setValue:@"katiej@cd1.onmicrosoft.com" forKey:@"dispatcherEmail"];
         [standardUserDefaults synchronize];
     }
     
