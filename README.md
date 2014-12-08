@@ -109,7 +109,7 @@ At this point VS will add the appropriate O365 Nuget packages to the Visual Stud
 The Property Manager My App stores configuration settings in the web.config file.  These settings must be configured for your environment in order for the Property Manager My App to work.  The Add Connected Service wizard creates some of these settings in the web.config file when it registers you app with Azure Active Directory.  These settings the Add Connected Service wizard creates include:
 
 - ida:ClientID
-- ida:Password
+- ida:AppKey
 - ida:AuthorizationUri
 
 In addition to the settings above, other settings exist which allow you to perform additional required configuration values.  These settings include:
@@ -127,20 +127,9 @@ In addition to the settings above, other settings exist which allow you to perfo
 
 Configure these settings in the web.config file to match your O365 / Azure Tenancy.
 
-Finally, add the following setting to your web.config file.
+Finally, search for the following setting in your web.config file.  If this setting is missing, add it.
 
 &lt;add key="ida:GraphResourceId" value="https://graph.windows.net/" /&gt;
-
-**Azure Active Directory User Accounts**
-The Property Manager My App and demo rely on Azure Active Directory Accounts to work.  The code will add the following users into Azure Active Directory.  Note: It may take up to 24 hours for the O365 infrastructure to create an Exchange Mailbox and Calendar.
-
-- Inspector: Rob Barker alias: robb
-- Dispatcher: Katie Jordan alias: katiej
-- Repair Person: Ron Gabel alias: rong
-- Property Owner: Margaret Au alias: marga
-- Inspector: Alisa Lawyer alias: alisal
-- Repair Person: Chris Gray alias: chrisg
-- Property Owner: Steven Wright alias: stevenw
 
 **Trusted Sites**
 Add **http://localhost** to the Trusted Sites list in Internet Explorer.
@@ -176,6 +165,10 @@ After you have performed the configuration steps described above, provision the 
 
 In Visual Studio, **press F5** to run the project. Ignore any errors which appear, they are due to the fact the Site Collection has not been provisioned yet. 
 
+**When you are prompted to log in you must use your O365 admin account.**  This allows you to grant consent to the Azure Active Directory application so the demo users will be able to use it.  When prompted, click the **Accept** button. 
+
+![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/grant consent.jpg)
+
 In your web browser, navigate to **http://localhost:41322/O365SiteProvisioning** to invoke the O365SiteProvisioning controller and create the Site Collection and information architecture.
 
 When the process completes you will see this screen:
@@ -194,7 +187,24 @@ Use this URL to access the Site Contents page:
 
 https://**&lt;Your Tenancy&gt;**.sharepoint.com/sites/SuiteLevelAppDemo/_layouts/15/viewlsts.aspx
 
-In your web browser, navigate to **http://localhost:41322/O365SiteProvisioning/CreateDemoData** to open the sample data provisioning form.
+Finally, you will create the Active Directory Groups, Users, and demo data to support the demo.  This process creates the following AD Users and Groups.
+
+**Note:** It may take up to 24 hours for the O365 infrastructure to create an Exchange Mailbox and Calendar.
+
+**Groups**
+Repair People
+Inspectors
+
+**Users**
+- Inspector: Rob Barker alias: robb
+- Dispatcher: Katie Jordan alias: katiej
+- Repair Person: Ron Gabel alias: rong
+- Property Owner: Margaret Au alias: marga
+- Inspector: Alisa Lawyer alias: alisal
+- Repair Person: Chris Gray alias: chrisg
+- Property Owner: Steven Wright alias: stevenw
+
+Next, click the **Create Sample Data** link in the top menu.  Then, click the **Populate** button.
 
 Enter the date when you plan to execute the demo, then click the **Populate** button.
 
@@ -208,6 +218,14 @@ Use this URL to access the Site Contents page:
 
 https://**&lt;Your Tenancy&gt;**.sharepoint.com/sites/SuiteLevelAppDemo/_layouts/15/viewlsts.aspx
 
+If you open the Admin app and browse to your active directory you will see the groups and users are created.  
+
+**Passwords**
+
+The initial password for all the users is **TempP@ssw0rd!**
+
+You will need to specify a new password for each user the first time you log in with them. 
+
 **User Account Permission**
 After you have provisioned the Site Collection and content you must grant Member access to the Inspector, Dispatcher, and Repair People accounts.
 
@@ -218,10 +236,10 @@ After you have provisioned the Site Collection and content you must grant Member
 - Repair Person: Chris Gray alias: chrisg
 
 **Property Manager My App Configuration**
-This is steps is optional.  If you wish to add a custom logo to your Property Manager My App you can update the logo corresponding to the AAD App Visual Studio creates in your AAD.  Use the following file you can find in the PropertyManagementMyApp Visual Studio Solution.  **/Content/Images/AADAppLogos/logo-prop-man.jpg**
+This step is optional.  If you wish to add a custom logo to your Property Manager My App you can update the logo corresponding to the AAD App Visual Studio creates in your AAD.  To do this, access the AAD App in the Azure Management Portal and use the following file you can find in the PropertyManagementMyApp Visual Studio Solution.  **/Content/Images/AADAppLogos/logo-prop-man.jpg**
 
 **Property Manager My App Installation Complete!**
-Now you can access the Property Manager My App dashboard landing page by clicking the **Property Management Dashboard** link in the top menu.  You can also access the dashboard by navigating to **http://localhost:44312/Dashboard** in your web browser.  
+Now you can access the Property Manager My App dashboard landing page by clicking the **Dashboard** link in the top menu.  You can also access the dashboard by navigating to **http://localhost:44312/Dashboard** in your web browser.  
 
 This is what the dashboard looks like.  In this screenshot, the Past Inspections tab is selected.
 
