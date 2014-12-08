@@ -241,9 +241,9 @@ This step is optional.  If you wish to add a custom logo to your Property Manage
 **Property Manager My App Installation Complete!**
 Now you can access the Property Manager My App dashboard landing page by clicking the **Dashboard** link in the top menu.  You can also access the dashboard by navigating to **http://localhost:44312/Dashboard** in your web browser.  
 
-This is what the dashboard looks like.  In this screenshot, the Past Inspections tab is selected.
+This is what the dashboard looks like.  In this screenshot, the Need Repair tab is selected.
 
-![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/dashboard.jpg)
+![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/dashboard 2.jpg)
 
 ## Install-iOS
 
