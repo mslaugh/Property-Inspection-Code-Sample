@@ -132,7 +132,7 @@ Finally, add the following setting to your web.config file.
 &lt;add key="ida:GraphResourceId" value="https://graph.windows.net/" /&gt;
 
 **Azure Active Directory User Accounts**
-The Property Manager My App and demo rely on Azure Active Directory Accounts to work.  Create the following users in Azure Active Directory.  Note: It may take up to 24 hours for the O365 infrastructure to create an Exchange Mailbox and Calendar.
+The Property Manager My App and demo rely on Azure Active Directory Accounts to work.  The code will add the following users into Azure Active Directory.  Note: It may take up to 24 hours for the O365 infrastructure to create an Exchange Mailbox and Calendar.
 
 - Inspector: Rob Barker alias: robb
 - Dispatcher: Katie Jordan alias: katiej
@@ -182,19 +182,6 @@ When the process completes you will see this screen:
 
 ![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/sc provision success.jpg)
 
-Next, click the **Create Sample Data** link in the top menu.  Then, click the **Populate** button.
-
-When the process completes you will see this screen:
-
-![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/content provision success.jpg)
-
-If you navigate to the Site Contents page in the Site Collection you will see all the new lists and libraries and sample content.
-
-Use this URL to access the Site Contents page:
-
-https://**&lt;Your Tenancy&gt;**.sharepoint.com/sites/SuiteLevelAppDemo/_layouts/15/viewlsts.aspx
-
-
 Next, click the **Provision Workflow** link in the top menu.  Then, click the **Populate** button.
 
 When the process completes you will see this screen:
@@ -206,6 +193,20 @@ If you navigate to the Site Contents page in the Site Collection you will see th
 Use this URL to access the Site Contents page:
 
 https://**&lt;Your Tenancy&gt;**.sharepoint.com/sites/SuiteLevelAppDemo/_layouts/15/viewlsts.aspx
+
+Next, click the **Create Sample Data** link in the top menu.  Then, click the **Populate** button.
+
+When the process completes you will see this screen:
+
+
+
+If you navigate to the Site Contents page in the Site Collection you will see all the new lists and libraries and sample content.
+
+Use this URL to access the Site Contents page:
+
+https://**&lt;Your Tenancy&gt;**.sharepoint.com/sites/SuiteLevelAppDemo/_layouts/15/viewlsts.aspx
+
+
 
 **User Account Permission**
 After you have provisioned the Site Collection and content you must grant Member access to the Inspector, Dispatcher, and Repair People accounts.
