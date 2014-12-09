@@ -162,12 +162,17 @@ These files contain the code which implements the Site Collection provisioning f
 
 After you have performed the configuration steps described above, provision the Site Collection and content.
 
-In Visual Studio, **press F5** to run the project. Ignore any errors which appear, they are due to the fact the Site Collection has not been provisioned yet. 
+In Visual Studio, **press F5** to run the project.   
+
+If the project will not build **right click the PropertyManagerMyApp project** and select **Manage Nuget Packages**.  Click the **Updates tab** and select **nuget.org**.  Click **Update All**.
+
 
 **When you are prompted to log in you must use your O365 admin account.**  This allows you to grant consent to the Azure Active Directory application so the demo users will be able to use it.  When prompted, click the **Accept** button. 
 
 ![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/grant consent.jpg)
 
+After you successfully build and run the project and login, ignore the errors you see in the web browser.  The errors occur because the Site Collection has not been provisioned yet.
+ 
 In your web browser, navigate to **http://localhost:41322/O365SiteProvisioning** to invoke the O365SiteProvisioning controller and create the Site Collection and information architecture.
 
 When the process completes you will see this screen:
