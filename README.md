@@ -10,7 +10,6 @@
 - [API Notes](#apis)
 - [Mail App for Office Notes](#mailafo)
 - [Links that open native iOS Apps Notes](#deeplinks)
-- [Working with the iOS apps in XCode](#xcode)
 - [License](#license)
 
 ## Overview
@@ -109,7 +108,7 @@ At this point VS will add the appropriate O365 Nuget packages to the Visual Stud
 The Property Manager My App stores configuration settings in the web.config file.  These settings must be configured for your environment in order for the Property Manager My App to work.  The Add Connected Service wizard creates some of these settings in the web.config file when it registers you app with Azure Active Directory.  These settings the Add Connected Service wizard creates include:
 
 - ida:ClientID
-- ida:Password
+- ida:AppKey
 - ida:AuthorizationUri
 
 In addition to the settings above, other settings exist which allow you to perform additional required configuration values.  These settings include:
@@ -127,20 +126,9 @@ In addition to the settings above, other settings exist which allow you to perfo
 
 Configure these settings in the web.config file to match your O365 / Azure Tenancy.
 
-Finally, add the following setting to your web.config file.
+Finally, search for the following setting in your web.config file.  If this setting is missing, add it.
 
 &lt;add key="ida:GraphResourceId" value="https://graph.windows.net/" /&gt;
-
-**Azure Active Directory User Accounts**
-The Property Manager My App and demo rely on Azure Active Directory Accounts to work.  Create the following users in Azure Active Directory.  Note: It may take up to 24 hours for the O365 infrastructure to create an Exchange Mailbox and Calendar.
-
-- Inspector: Rob Barker alias: robb
-- Dispatcher: Katie Jordan alias: katiej
-- Repair Person: Ron Gabel alias: rong
-- Property Owner: Margaret Au alias: marga
-- Inspector: Alisa Lawyer alias: alisal
-- Repair Person: Chris Gray alias: chrisg
-- Property Owner: Steven Wright alias: stevenw
 
 **Trusted Sites**
 Add **http://localhost** to the Trusted Sites list in Internet Explorer.
@@ -176,24 +164,15 @@ After you have performed the configuration steps described above, provision the 
 
 In Visual Studio, **press F5** to run the project. Ignore any errors which appear, they are due to the fact the Site Collection has not been provisioned yet. 
 
+**When you are prompted to log in you must use your O365 admin account.**  This allows you to grant consent to the Azure Active Directory application so the demo users will be able to use it.  When prompted, click the **Accept** button. 
+
+![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/grant consent.jpg)
+
 In your web browser, navigate to **http://localhost:41322/O365SiteProvisioning** to invoke the O365SiteProvisioning controller and create the Site Collection and information architecture.
 
 When the process completes you will see this screen:
 
 ![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/sc provision success.jpg)
-
-Next, click the **Create Sample Data** link in the top menu.  Then, click the **Populate** button.
-
-When the process completes you will see this screen:
-
-![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/content provision success.jpg)
-
-If you navigate to the Site Contents page in the Site Collection you will see all the new lists and libraries and sample content.
-
-Use this URL to access the Site Contents page:
-
-https://**&lt;Your Tenancy&gt;**.sharepoint.com/sites/SuiteLevelAppDemo/_layouts/15/viewlsts.aspx
-
 
 Next, click the **Provision Workflow** link in the top menu.  Then, click the **Populate** button.
 
@@ -207,6 +186,45 @@ Use this URL to access the Site Contents page:
 
 https://**&lt;Your Tenancy&gt;**.sharepoint.com/sites/SuiteLevelAppDemo/_layouts/15/viewlsts.aspx
 
+Finally, you will create the Active Directory Groups, Users, and demo data to support the demo.  This process creates the following AD Users and Groups.
+
+**Note:** It may take up to 24 hours for the O365 infrastructure to create an Exchange Mailbox and Calendar.
+
+**Groups**
+Repair People
+Inspectors
+
+**Users**
+- Inspector: Rob Barker alias: robb
+- Dispatcher: Katie Jordan alias: katiej
+- Repair Person: Ron Gabel alias: rong
+- Property Owner: Margaret Au alias: marga
+- Inspector: Alisa Lawyer alias: alisal
+- Repair Person: Chris Gray alias: chrisg
+- Property Owner: Steven Wright alias: stevenw
+
+Next, click the **Create Sample Data** link in the top menu.  Then, click the **Populate** button.
+
+Enter the date when you plan to execute the demo, then click the **Populate** button.
+
+When the process completes you will see this screen:
+
+![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/demo data provision success.jpg)
+
+If you navigate to the Site Contents page in the Site Collection you will see the lists and libraries which indicate they just had sample data added to them.
+
+Use this URL to access the Site Contents page:
+
+https://**&lt;Your Tenancy&gt;**.sharepoint.com/sites/SuiteLevelAppDemo/_layouts/15/viewlsts.aspx
+
+If you open the Admin app and browse to your active directory you will see the groups and users are created.  
+
+**Passwords**
+
+The initial password for all the users is **TempP@ssw0rd!**
+
+You will need to specify a new password for each user the first time you log in with them. 
+
 **User Account Permission**
 After you have provisioned the Site Collection and content you must grant Member access to the Inspector, Dispatcher, and Repair People accounts.
 
@@ -217,14 +235,14 @@ After you have provisioned the Site Collection and content you must grant Member
 - Repair Person: Chris Gray alias: chrisg
 
 **Property Manager My App Configuration**
-This is steps is optional.  If you wish to add a custom logo to your Property Manager My App you can update the logo corresponding to the AAD App Visual Studio creates in your AAD.  Use the following file you can find in the PropertyManagementMyApp Visual Studio Solution.  **/Content/Images/AADAppLogos/logo-prop-man.jpg**
+This step is optional.  If you wish to add a custom logo to your Property Manager My App you can update the logo corresponding to the AAD App Visual Studio creates in your AAD.  To do this, access the AAD App in the Azure Management Portal and use the following file you can find in the PropertyManagementMyApp Visual Studio Solution.  **/Content/Images/AADAppLogos/logo-prop-man.jpg**
 
 **Property Manager My App Installation Complete!**
-Now you can access the Property Manager My App dashboard landing page by clicking the **Property Management Dashboard** link in the top menu.  You can also access the dashboard by navigating to **http://localhost:44312/Dashboard** in your web browser.  
+Now you can access the Property Manager My App dashboard landing page by clicking the **Dashboard** link in the top menu.  You can also access the dashboard by navigating to **http://localhost:44312/Dashboard** in your web browser.  
 
-This is what the dashboard looks like.  In this screenshot, the Past Inspections tab is selected.
+This is what the dashboard looks like.  In this screenshot, the Need Repair tab is selected.
 
-![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/dashboard.jpg)
+![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/dashboard 2.jpg)
 
 ## Install-iOS
 
@@ -258,13 +276,20 @@ The iOS Apps use O365 APIs and SharePoint REST APIs to interact with an O365 / A
 
 **iOS App Installation**
 
-Now you are ready to install the iOS Apps.  This section provides details about your installation options.
+Now you are ready to install the iOS Apps.  
 
-The easiest way to install the iOS apps to your iPad is to download the .ipa files to your computer and install them on your iPad.  iFunBox is a tool capable of deploying iOS Apps to a non-rooted iPad.
+In the iOSInspectionApp and iOSRepairApp folder you will find runnable sample code for iOS Apps which the O365 APIs.
 
-Optionally, you can clone the GitHub repository and load the iOS App Workspaces in XCode then run them in the iOS Simulator or deploy them to an iPad.  This option requires a Mac and XCode.  If you choose this option please see the installation notes in the [XCode](#xcode) section which describe how to register the CocoaPods with the iOS projects.  The CocoaPods must be installed to enable the iOS Apps project workspaces to build and run.
+First, on a Mac machine, clone the GitHub repository.  
 
-**Note:** A Mac and XCode is required if you wish to debug the iOS code.
+The samples utilize Cocoapods to configure both the Office365 SDKs and ADAL.  To use Cocoapods to add the SDKs to the workspaces perform these steps for both the Inspection and Repair iOS Apps.
+
+1. Open Terminal.
+2. Navigate to inside the project's folder.
+3. Run `pod install`.
+4. Run `open iOSInspectionApp.xcworkspace` or `open iOSRepairApp.xcworkspace` to open the workspace with all projects and dependencies loaded appropriately.
+
+> For more info on Cocoapods setup see the Office 365 SDK for iOS [wiki](https://github.com/OfficeDev/Office-365-SDK-for-iOS/wiki/Cocoapods-Setup) and [their site](http://cocoapods.org).
 
 **iOS App Configuration**
 After the iOS Apps are deployed, you need to configure them to work with an O365 / Azure Tenancy and the Azure Active Directory Applications you created.
@@ -273,13 +298,14 @@ After the iOS Apps are deployed, you need to configure them to work with an O365
 
 To configure the iPad Apps settings follow these instructions.  You need to perform these same steps for both the Inspection and Repair iOS apps.
 
-1. Tap the **iPad App** on the iPad to open it.
-2. After the iPad App is loaded and the Sign In screen is displayed, push the **home button** two times and close/terminate the running instance of the application.
-3. Next, open the **native iOS Settings App**.
-4. In the left column, tap the **name of the app**.
-5. Enter the values which correspond to the Azure Active Directory application you created for the iPad Apps.
-6. Enter the URL to the Site Collection created by the Property Manager My App.
-7. Enter the email address for the Dispatcher. (katiej&#64;&lt;Your Tenancy&gt;.onmicrosoft.com)
+1. In XCode, run the **iPad App**.
+2. Tap the **iPad App** on the iPad to open it.
+3. After the iPad App is loaded and the Sign In screen is displayed, push the **home button** two times and close/terminate the running instance of the application.
+4. Next, open the **native iOS Settings App**.
+5. In the left column, tap the **name of the app**.
+6. Enter the values which correspond to the Azure Active Directory application you created for the iPad Apps.
+7. Enter the URL to the Site Collection created by the Property Manager My App.
+8. Enter the email address for the Dispatcher. (katiej&#64;&lt;Your Tenancy&gt;.onmicrosoft.com)
 
 These are the values that must be configured.
 
@@ -354,20 +380,6 @@ The Mail App for Office included in the demo renders properly in PC web browsers
 
 ## Deeplinks
 The links in the workflow emails which open the native iOS apps on an iOS device work when using the native iOS email client.  At this time they are not supported in Safari or the OWA app.
-
-## XCode
-In the iOSInspectionApp and iOSRepairApp folder you will find runnable sample code for iOS Apps which the O365 APIs.
-
-The samples utilize Cocoapods to configure both the Office365 SDKs and ADAL.
-
-Here's how to run these samples.  You need to perform these steps for both the Inspection and Repair iOS Apps.
-
-1. Open Terminal.
-2. Navigate to inside the project's folder.
-3. Run `pod install`.
-4. Run `open iOSInspectionApp.xcworkspace` or `open iOSRepairApp.xcworkspace` to open the workspace with all projects and dependencies loaded appropriately.
-
-> For more info on Cocoapods setup see the Office 365 SDK for iOS [wiki](https://github.com/OfficeDev/Office-365-SDK-for-iOS/wiki/Cocoapods-Setup) and [their site](http://cocoapods.org).
 
 ## License
 Copyright (c) Microsoft, Inc. All rights reserved. Licensed under the Apache License, Version 2.0.
