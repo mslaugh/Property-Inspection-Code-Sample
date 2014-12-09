@@ -2718,10 +2718,10 @@
                 {
                     showPlus = YES;
                 }
-                if([[inspecdic objectForKey:@"sl_finalized"] isEqualToString:@"YES"])
-                {
-                    showFinal = YES;
-                }
+            }
+            if([[inspecdic objectForKey:@"sl_finalized"] isEqualToString:@"YES"])
+            {
+                showFinal = YES;
             }
             
             
