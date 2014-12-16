@@ -113,16 +113,36 @@ The Property Manager My App stores configuration settings in the web.config file
 
 In addition to the settings above, other settings exist which allow you to perform additional required configuration values.  These settings include:
 
-- **ServiceResourceId** Url for the O365 tenant admin site
-- **DashboardServiceResourceId** Url for the root Site Collection in the O365 Tenancy
-- **DashboardServiceEndpointUri** Api Endpoint for the Site Collection used by the Property Manager My App
-- **DemoSiteServiceResourceId** Url for the root Site Collection in the O365 Tenancy
-- **DemoSiteCollectionUrl** Url used to create the Site Collection used by Property Manager My App
-- **O365SvcResourceId** Url for the O365 Discovery Service
-- **O365SvcEndpointUri** Api Endpoint for the O365 Discovery Service API
-- **DemoSiteCollectionOwner** Email address for Site Collection owner (admin&#64;&lt;Your Tenancy&gt;.onmicrosoft.com)
-- **DispatcherName** Display Name for Dispatcher (Katie Jordan)
-- **DispatcherEmail** Email address for Dispatcher (katiej&#64;&lt;Your Tenancy&gt;.onmicrosoft.com)
+- **ServiceResourceId** Url for the O365 tenant admin site 
+
+    Example: https://contoso-admin.sharepoint.com
+- **DashboardServiceResourceId** Url for the root Site Collection in the O365 Tenancy 
+
+    Example: https://contoso.sharepoint.com
+- **DashboardServiceEndpointUri** Api Endpoint for the Site Collection used by the Property Manager My App 
+
+    Example: https://contoso.sharepoint.com/sites/SuiteLevelAppDemo/_api/
+- **DemoSiteServiceResourceId** Url for the root Site Collection in the O365 Tenancy 
+
+    Example: https://contoso.sharepoint.com
+- **DemoSiteCollectionUrl** Url used to create the Site Collection used by Property Manager My App 
+
+    Example: https://contoso.sharepoint.com/sites/SuiteLevelAppDemo
+- **O365SvcResourceId** Url for the O365 Discovery Service 
+
+    Example: https://api.office.com/discovery/
+- **O365SvcEndpointUri** Api Endpoint for the O365 Discovery Service API 
+
+    Example: https://api.office.com/discovery/me/
+- **DemoSiteCollectionOwner** Email address for Site Collection owner (admin&#64;&lt;Your Tenancy&gt;.onmicrosoft.com) 
+
+    Example: ADMIN@contoso.onmicrosoft.com
+- **DispatcherName** Display Name for Dispatcher (Katie Jordan) 
+
+    Example: Katie Jordan
+- **DispatcherEmail** Email address for Dispatcher (katiej&#64;&lt;Your Tenancy&gt;.onmicrosoft.com) 
+
+    Example: katiej@contoso.onmicrosoft.com
 
 Configure these settings in the web.config file to match your O365 / Azure Tenancy.
 
