@@ -47,8 +47,8 @@ namespace SuiteLevelWebApp.Controllers
                                 StorageMaximumLevel = 1000,
                                 StorageWarningLevel = 750,
                                 TimeZoneId = 7,
-                                UserCodeMaximumLevel = 1000,
-                                UserCodeWarningLevel = 500
+                                UserCodeMaximumLevel = 0,
+                                UserCodeWarningLevel = 0
                             });
 
                             ViewBag.refresh = "refresh";
