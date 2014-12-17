@@ -214,7 +214,7 @@ After you have performed the configuration steps described above, provision the 
 	 
 **Provision Site Collection and information architecture**
 
-6. In your web browser, navigate to **http://localhost:41322/O365SiteProvisioning** to invoke the O365SiteProvisioning controller and create the Site Collection and information architecture.
+6. In your web browser, navigate to **http://localhost:44312/O365SiteProvisioning** to invoke the O365SiteProvisioning controller and create the Site Collection and information architecture.
 
 	When the process completes you will see this screen:
 	
