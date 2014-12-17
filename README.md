@@ -236,22 +236,22 @@ After you have performed the configuration steps described above, provision the 
 
 **Provision Azure Active Directory Groups, Users, and demo data**
 
-	Finally, you will create the Azure Active Directory Groups, Users, and demo data to support the demo.  This process creates the following AD Users and Groups.
+Finally, you will create the Azure Active Directory Groups, Users, and demo data to support the demo.  This process creates the following AD Users and Groups.
 	
-	**Note:** It may take up to 24 hours for the O365 infrastructure to create an Exchange Mailbox and Calendar.
-	
-	**Groups**
-	Repair People
-	Inspectors
-	
-	**Users**
-	- Inspector: Rob Barker alias: robb
-	- Dispatcher: Katie Jordan alias: katiej
-	- Repair Person: Ron Gabel alias: rong
-	- Property Owner: Margaret Au alias: marga
-	- Inspector: Alisa Lawyer alias: alisal
-	- Repair Person: Chris Gray alias: chrisg
-	- Property Owner: Steven Wright alias: stevenw
+**Note:** It may take up to 24 hours for the O365 infrastructure to create an Exchange Mailbox and Calendar.
+
+**Groups**
+Repair People
+Inspectors
+
+**Users**
+- Inspector: Rob Barker alias: robb
+- Dispatcher: Katie Jordan alias: katiej
+- Repair Person: Ron Gabel alias: rong
+- Property Owner: Margaret Au alias: marga
+- Inspector: Alisa Lawyer alias: alisal
+- Repair Person: Chris Gray alias: chrisg
+- Property Owner: Steven Wright alias: stevenw
 
 8. Next, click the **Create Sample Data** link in the top menu.  Then, click the **Populate** button.
 
