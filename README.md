@@ -72,6 +72,10 @@ The sections below provide more information about these components and how to ge
 ## Install-MyApp
 To set up and configure the demo first download the Property Manager My App and open it in Visual Studio 2013.
 
+**Important Note:**  Save the PropertyManagerMyApp directory to the root of one of your drives to ensure all Nuget functionality will work and your file paths will not become too long.
+
+**Register the Property Manager My App with your Azure Active Directory**
+
 To register the Property Manager My App with your Azure Active Directory follow these steps.
 
 1. Right click the **PropertyManagerMyApp project** and select **Add -> Connected Service**.  
@@ -104,7 +108,7 @@ To register the Property Manager My App with your Azure Active Directory follow 
 
 At this point VS will add the appropriate O365 Nuget packages to the Visual Studio Solution.
 
-**web.config**
+**Edit web.config**
 The Property Manager My App stores configuration settings in the web.config file.  These settings must be configured for your environment in order for the Property Manager My App to work.  The Add Connected Service wizard creates some of these settings in the web.config file when it registers you app with Azure Active Directory.  These settings the Add Connected Service wizard creates include:
 
 - ida:ClientID
@@ -144,14 +148,30 @@ In addition to the settings above, other settings exist which allow you to perfo
 
     Example: katiej@contoso.onmicrosoft.com
 
-Configure these settings in the web.config file to match your O365 / Azure Tenancy.
+1. Configure these settings in the web.config file to match your O365 / Azure Tenancy by replacing the TENANCY placeholders in the web.config with your tenancy name.
 
-Finally, search for the following setting in your web.config file.  If this setting is missing, add it.
+2. Edit the DemoSiteCollectionOwner setting in the web.config file to match your O365 / Azure Tenancy global administrator account.
 
-&lt;add key="ida:GraphResourceId" value="https://graph.windows.net/" /&gt;
+3. Search for the following setting in your web.config file.  
 
-**Trusted Sites**
-Add **http://localhost** to the Trusted Sites list in Internet Explorer.
+	&lt;add key="ida:GraphResourceId" value="https://graph.windows.net/" /&gt;
+
+4. If this setting is missing, add it **inside the appSettings section**.
+
+5. Search for the following Password setting in your web.config file.  
+
+	&lt;add key="**ida:Password**" value="YOUR APP KEY" /&gt;
+	
+6. If this setting is present, rename it to AppKey, like this:
+	
+	&lt;add key="**ida:AppKey**" value="YOUR APP KEY" /&gt;
+
+4. Right click the **PropertyManagerMyApp project** and select **Manage Nuget Packages**.
+5. Click the **Updates tab** and select **nuget.org**.
+6. Click **Update All**.
+
+**Configure Trusted Sites**
+1. Add **http://localhost** to the Trusted Sites list in Internet Explorer.
 
 **Site Collection Provisioning**
 
@@ -182,67 +202,72 @@ These files contain the code which implements the Site Collection provisioning f
 
 After you have performed the configuration steps described above, provision the Site Collection and content.
 
-In Visual Studio, **press F5** to run the project.   
+1. In Visual Studio, **press F5** to run the project.   
 
-If the project will not build **right click the PropertyManagerMyApp project** and select **Manage Nuget Packages**.  Click the **Updates tab** and select **nuget.org**.  Click **Update All**.
+	**When you are prompted to log in you must use your O365 admin account.**  This allows you to grant consent to the Azure Active Directory application so the demo users will be able to use it.  
 
+5. When prompted, click the **Accept** button. 
 
-**When you are prompted to log in you must use your O365 admin account.**  This allows you to grant consent to the Azure Active Directory application so the demo users will be able to use it.  When prompted, click the **Accept** button. 
+	![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/grant consent.jpg)
+	
+	After you successfully build and run the project and login, ignore the errors you see in the web browser.  The errors occur because the Site Collection has not been provisioned yet.
+	 
+**Provision Site Collection and information architecture**
 
-![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/grant consent.jpg)
+6. In your web browser, navigate to **http://localhost:41322/O365SiteProvisioning** to invoke the O365SiteProvisioning controller and create the Site Collection and information architecture.
 
-After you successfully build and run the project and login, ignore the errors you see in the web browser.  The errors occur because the Site Collection has not been provisioned yet.
- 
-In your web browser, navigate to **http://localhost:41322/O365SiteProvisioning** to invoke the O365SiteProvisioning controller and create the Site Collection and information architecture.
+	When the process completes you will see this screen:
+	
+	![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/sc provision success.jpg)
 
-When the process completes you will see this screen:
+**Provision Workflow**
 
-![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/sc provision success.jpg)
+7. Next, click the **Provision Workflow** link in the top menu.  Then, click the **Populate** button.
 
-Next, click the **Provision Workflow** link in the top menu.  Then, click the **Populate** button.
+	When the process completes you will see this screen:
+	
+	![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/workflow provision success.jpg)
+	
+	If you navigate to the Site Contents page in the Site Collection you will see the new Workflow History and Workflow Tasks lists.
+	
+	Use this URL to access the Site Contents page:
+	
+	https://**&lt;Your Tenancy&gt;**.sharepoint.com/sites/SuiteLevelAppDemo/_layouts/15/viewlsts.aspx
 
-When the process completes you will see this screen:
+**Provision Azure Active Directory Groups, Users, and demo data**
 
-![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/workflow provision success.jpg)
+	Finally, you will create the Azure Active Directory Groups, Users, and demo data to support the demo.  This process creates the following AD Users and Groups.
+	
+	**Note:** It may take up to 24 hours for the O365 infrastructure to create an Exchange Mailbox and Calendar.
+	
+	**Groups**
+	Repair People
+	Inspectors
+	
+	**Users**
+	- Inspector: Rob Barker alias: robb
+	- Dispatcher: Katie Jordan alias: katiej
+	- Repair Person: Ron Gabel alias: rong
+	- Property Owner: Margaret Au alias: marga
+	- Inspector: Alisa Lawyer alias: alisal
+	- Repair Person: Chris Gray alias: chrisg
+	- Property Owner: Steven Wright alias: stevenw
 
-If you navigate to the Site Contents page in the Site Collection you will see the new Workflow History and Workflow Tasks lists.
+8. Next, click the **Create Sample Data** link in the top menu.  Then, click the **Populate** button.
 
-Use this URL to access the Site Contents page:
+9. Enter the date when you plan to execute the demo, then click the **Populate** button.
 
-https://**&lt;Your Tenancy&gt;**.sharepoint.com/sites/SuiteLevelAppDemo/_layouts/15/viewlsts.aspx
-
-Finally, you will create the Active Directory Groups, Users, and demo data to support the demo.  This process creates the following AD Users and Groups.
-
-**Note:** It may take up to 24 hours for the O365 infrastructure to create an Exchange Mailbox and Calendar.
-
-**Groups**
-Repair People
-Inspectors
-
-**Users**
-- Inspector: Rob Barker alias: robb
-- Dispatcher: Katie Jordan alias: katiej
-- Repair Person: Ron Gabel alias: rong
-- Property Owner: Margaret Au alias: marga
-- Inspector: Alisa Lawyer alias: alisal
-- Repair Person: Chris Gray alias: chrisg
-- Property Owner: Steven Wright alias: stevenw
-
-Next, click the **Create Sample Data** link in the top menu.  Then, click the **Populate** button.
-
-Enter the date when you plan to execute the demo, then click the **Populate** button.
-
-When the process completes you will see this screen:
-
-![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/demo data provision success.jpg)
-
-If you navigate to the Site Contents page in the Site Collection you will see the lists and libraries which indicate they just had sample data added to them.
-
-Use this URL to access the Site Contents page:
-
-https://**&lt;Your Tenancy&gt;**.sharepoint.com/sites/SuiteLevelAppDemo/_layouts/15/viewlsts.aspx
-
-If you open the Admin app and browse to your active directory you will see the groups and users are created.  
+	When the process completes you will see this screen:
+	
+	![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/demo data provision success.jpg)
+	
+	If you navigate to the Site Contents page in the Site Collection you will see the lists and libraries which indicate they just had sample data added to them.
+	
+	Use this URL to access the Site Contents page:
+	
+	https://**&lt;Your Tenancy&gt;**.sharepoint.com/sites/SuiteLevelAppDemo/_layouts/15/viewlsts.aspx
+	
+	If you open the Admin app and browse to your active directory you will see the groups and users are created.  
 
 **Passwords**
 
@@ -251,7 +276,7 @@ The initial password for all the users is **TempP@ssw0rd!**
 You will need to specify a new password for each user the first time you log in with them. 
 
 **User Account Permission**
-After you have provisioned the Site Collection and content you must grant Member access to the Inspector, Dispatcher, and Repair People accounts.
+1. After you have provisioned the Site Collection and content you must grant Member access to the Inspector, Dispatcher, and Repair People accounts.
 
 - Inspector: Rob Barker alias: robb
 - Dispatcher: Katie Jordan alias: katiej
@@ -263,7 +288,7 @@ After you have provisioned the Site Collection and content you must grant Member
 This step is optional.  If you wish to add a custom logo to your Property Manager My App you can update the logo corresponding to the AAD App Visual Studio creates in your AAD.  To do this, access the AAD App in the Azure Management Portal and use the following file you can find in the PropertyManagementMyApp Visual Studio Solution.  **/Content/Images/AADAppLogos/logo-prop-man.jpg**
 
 **Property Manager My App Installation Complete!**
-Now you can access the Property Manager My App dashboard landing page by clicking the **Dashboard** link in the top menu.  You can also access the dashboard by navigating to **http://localhost:44312/Dashboard** in your web browser.  
+1. Now you can access the Property Manager My App dashboard landing page by clicking the **Dashboard** link in the top menu.  You can also access the dashboard by navigating to **http://localhost:44312/Dashboard** in your web browser.  
 
 This is what the dashboard looks like.  In this screenshot, the Need Repair tab is selected.
 
