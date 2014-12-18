@@ -780,7 +780,7 @@
     NSString *propertyAddress = [EKNEKNGlobalInfo getString:[self.propertyDetailDic objectForKey:@"sl_address1"]];
     NSMutableDictionary *emailDataDic = [[NSMutableDictionary alloc] init];
     NSString *currentDate = [EKNEKNGlobalInfo converStringFromDate:[NSDate date]];
-    NSMutableString *body =[[NSMutableString alloc] initWithString:@"\r\nDuring a recent repair on your property an incident was reported.\r\n"];
+    NSMutableString *body =[[NSMutableString alloc] initWithString:@"\r\nThe incident found during a recent inspection on your property has been repaired.\r\n"];
     [body appendFormat:@"\r\n\r\nProperty Name: %@\r\nProperty Address: %@\r\n\r\nRepair Date: <%@>\r\n\r\n",propertyName,propertyAddress,currentDate];
     
     
