@@ -254,13 +254,13 @@ Currently, an issue has been discovered when trying to add users to groups via A
 1. Open the O365 Admin app.
 2. Add the following users to the Inspectors Azure Active Directory Group:
 
-	Rob Barker alias: robb
-	Alisa Lawyer alias: alisal
+- Rob Barker alias: robb
+- Alisa Lawyer alias: alisal
 
 3. Add the following users to the Repair People Azure Active Directory Group:
 
-	Ron Gabel alias: rong
-	Chris Gray alias: chrisg
+- Ron Gabel alias: rong
+- Chris Gray alias: chrisg
 
 **Passwords**
 
