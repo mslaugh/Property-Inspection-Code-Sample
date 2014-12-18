@@ -112,10 +112,10 @@ At this point VS will add the appropriate O365 Nuget packages to the Visual Stud
 The Property Manager My App stores configuration settings in the web.config file.  These settings must be configured for your environment in order for the Property Manager My App to work.  The Add Connected Service wizard creates some of these settings in the web.config file when it registers you app with Azure Active Directory.  These settings the Add Connected Service wizard creates include:
 
 - ida:ClientID
-- ida:AppKey
+- ida:Password
 - ida:AuthorizationUri
 
-In addition to the settings above, other settings exist which allow you to perform additional required configuration values.  These settings include:
+In addition to the settings above, other settings exist that you must configure to match your tenancy.  These settings include:
 
 - **ServiceResourceId** Url for the O365 tenant admin site 
 
@@ -132,12 +132,7 @@ In addition to the settings above, other settings exist which allow you to perfo
 - **DemoSiteCollectionUrl** Url used to create the Site Collection used by Property Manager My App 
 
     Example: https://contoso.sharepoint.com/sites/SuiteLevelAppDemo
-- **O365SvcResourceId** Url for the O365 Discovery Service 
 
-    Example: https://api.office.com/discovery/
-- **O365SvcEndpointUri** Api Endpoint for the O365 Discovery Service API 
-
-    Example: https://api.office.com/discovery/me/
 - **DemoSiteCollectionOwner** Email address for Site Collection owner (admin&#64;&lt;Your Tenancy&gt;.onmicrosoft.com) 
 
     Example: ADMIN@contoso.onmicrosoft.com
@@ -152,23 +147,9 @@ In addition to the settings above, other settings exist which allow you to perfo
 
 2. Edit the DemoSiteCollectionOwner setting in the web.config file to match your O365 / Azure Tenancy global administrator account.
 
-3. Search for the following setting in your web.config file.  
-
-	&lt;add key="ida:GraphResourceId" value="https://graph.windows.net/" /&gt;
-
-4. If this setting is missing, add it **inside the appSettings section**.
-
-5. Search for the following Password setting in your web.config file.  
-
-	&lt;add key="**ida:Password**" value="YOUR APP KEY" /&gt;
-	
-6. If this setting is present, rename it to AppKey, like this:
-	
-	&lt;add key="**ida:AppKey**" value="YOUR APP KEY" /&gt;
-
-4. Right click the **PropertyManagerMyApp project** and select **Manage Nuget Packages**.
-5. Click the **Updates tab** and select **nuget.org**.
-6. Click **Update All**.
+3. Right click the **PropertyManagerMyApp project** and select **Manage Nuget Packages**.
+4. Click the **Updates tab** and select **nuget.org**.
+5. Click **Update All**.
 
 **Configure Trusted Sites**
 1. Add **http://localhost** to the Trusted Sites list in Internet Explorer.
@@ -237,8 +218,6 @@ After you have performed the configuration steps described above, provision the 
 **Provision Azure Active Directory Groups, Users, and demo data**
 
 Finally, you will create the Azure Active Directory Groups, Users, and demo data to support the demo.  This process creates the following AD Users and Groups.
-	
-**Note:** It may take up to 24 hours for the O365 infrastructure to create an Exchange Mailbox and Calendar.
 
 **Groups**
 Repair People
@@ -275,6 +254,9 @@ The initial password for all the users is **TempP@ssw0rd!**
 
 You will need to specify a new password for each user the first time you log in with them. 
 
+**Grant Licenses**
+1. After you have provisioned the Site Collection, content and accounts, open the Admin app and grant licenses to the accounts.
+
 **User Account Permission**
 1. After you have provisioned the Site Collection and content you must grant Member access to the Inspector, Dispatcher, and Repair People accounts.
 
@@ -283,6 +265,11 @@ You will need to specify a new password for each user the first time you log in 
 - Repair Person: Ron Gabel alias: rong
 - Inspector: Alisa Lawyer alias: alisal
 - Repair Person: Chris Gray alias: chrisg
+
+**Mailbox setup**
+1. Next, log in with each user to your tenancy and access Outlook to set up their email.
+
+**Note:** It may take up to 24 hours for the O365 infrastructure to create an Exchange Mailbox and Calendar.
 
 **Property Manager My App Configuration**
 This step is optional.  If you wish to add a custom logo to your Property Manager My App you can update the logo corresponding to the AAD App Visual Studio creates in your AAD.  
