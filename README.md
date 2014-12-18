@@ -78,7 +78,7 @@ To set up and configure the demo first download the Property Manager My App and 
 
 To register the Property Manager My App with your Azure Active Directory follow these steps.
 
-1. Right click the **PropertyManagerMyApp project** and select **Add -> Connected Service**.  
+1. Right click the **PropertyManagerMyApp project** and select **Add -> Connected Service**.
 2. Authenticate with the administrator credentials associated with your tenancy.
 3. Use the wizard to configure the appropriate O365 permissions.
   
@@ -144,15 +144,13 @@ In addition to the settings above, other settings exist that you must configure 
     Example: katiej@contoso.onmicrosoft.com
 
 1. Configure these settings in the web.config file to match your O365 / Azure Tenancy by **replacing the TENANCY placeholders in the web.config** with your tenancy name.  In the examples above, the TENANCY placeholder was replaced with contoso.
-
 2. Edit the **DemoSiteCollectionOwner setting** in the web.config file to match your O365 / Azure Tenancy global administrator account.
-
 3. Right click the **PropertyManagerMyApp project** and select **Manage Nuget Packages**.
 4. Click the **Updates tab** and select **nuget.org**.
-5. ****
 5. Click **Update All**.
 
 **Configure Trusted Sites**
+
 1. Add **http://localhost** to the Trusted Sites list in Internet Explorer.
 
 **Site Collection Provisioning**
@@ -221,8 +219,9 @@ After you have performed the configuration steps described above, provision the 
 Finally, you will create the Azure Active Directory Groups, Users, and demo data to support the demo.  This process creates the following AD Users and Groups.
 
 **Groups**
-Repair People
-Inspectors
+
+- Repair People
+- Inspectors
 
 **Users**
 - Inspector: Rob Barker alias: robb
@@ -299,6 +298,7 @@ Next you must grant access member to the Inspector, Dispatcher, and Repair Peopl
 - Repair Person: Chris Gray alias: chrisg
 
 **Mailbox setup**
+
 1. Next, log in with each user to your tenancy and access Outlook to set up their email.
 
 **Note:** It may take up to 24 hours for the O365 infrastructure to create an Exchange Mailbox and Calendar.  Usually, it takes 10 seconds.
