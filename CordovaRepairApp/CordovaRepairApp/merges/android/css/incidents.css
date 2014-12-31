@@ -334,13 +334,12 @@ td{
     }
     #rp_incidentsdetail>.rp_middle>div>.rp_top{
         height:80px;
-        background-color:#000;
+        background-color:transparent;
         overflow:hidden;
     }
         #rp_incidentsdetail>.rp_middle>div>.rp_top>div{
             margin-top:1px;
             margin-bottom:1px;
-            margin-right:1px;
             padding-top:14px;
             padding-bottom:14px;
             border:1px solid #888888;
@@ -352,10 +351,6 @@ td{
             text-align:center;
         }
 
-
-        #rp_incidentsdetail>.rp_middle>div:last-child>.rp_top>div{
-            margin-right:0px;
-        }
          #rp_incidentsdetail>.rp_middle>div>.rp_top>div>img{
             height:50px;
         }
