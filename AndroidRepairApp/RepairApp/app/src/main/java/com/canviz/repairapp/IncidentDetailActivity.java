@@ -140,6 +140,13 @@ public class IncidentDetailActivity extends Activity {
             }
         });
 
+        largeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         selectTab(1);
         loadData();
         bindPropertyData();
@@ -221,7 +228,7 @@ public class IncidentDetailActivity extends Activity {
         }
 
         String statusStr = SelectedIncidentModel.getStatus();
-        if(!Helper.IsNullOrEmpty(SelectedIncidentModel.getRepairCompleted()) || statusStr.equals("Repair Pending Approval") || statusStr.equals("Repair Approved")){
+        if(!Helper.IsNullOrEmpty(SelectedIncidentModel.getRepairCompleted()) || (!Helper.IsNullOrEmpty(statusStr) && statusStr.equals("Repair Pending Approval")) || (!Helper.IsNullOrEmpty(statusStr) && statusStr.equals("Repair Approved"))){
             setBtnStatus(false);
         }
         else{
@@ -248,7 +255,7 @@ public class IncidentDetailActivity extends Activity {
         intent.setType("plain/text");
         intent.putExtra( android.content.Intent.EXTRA_EMAIL, new String[] {to} );
         intent.putExtra( android.content.Intent.EXTRA_SUBJECT, "");
-        intent.putExtra(android.content.Intent.EXTRA_TEXT, "Send from android");
+        intent.putExtra(android.content.Intent.EXTRA_TEXT, "Sent from Android");
         Intent chooserIntent = Intent.createChooser(intent, "Send Email");
         startActivity( chooserIntent );
     }
@@ -364,11 +371,11 @@ public class IncidentDetailActivity extends Activity {
                 sendEmailAfterRepairCompleted();
                 finalizeBtn.setVisibility(View.GONE);
                 setBtnStatus(false);
-                Toast.makeText(IncidentDetailActivity.this, "Finalize repair successfully.", Toast.LENGTH_LONG).show();
+                Toast.makeText(IncidentDetailActivity.this, "Finalized repair successfully.", Toast.LENGTH_LONG).show();
             }
             else
             {
-                Toast.makeText(IncidentDetailActivity.this, "Finalize repair failed.", Toast.LENGTH_LONG).show();
+                Toast.makeText(IncidentDetailActivity.this, "Finalizing repair failed.", Toast.LENGTH_LONG).show();
             }
             process.dismiss();
         }
@@ -380,11 +387,11 @@ public class IncidentDetailActivity extends Activity {
             if(msg.what == Constants.SUCCESS)
             {
                 repairComment.setText(repairCommentEdit.getText().toString());
-                Toast.makeText(IncidentDetailActivity.this, "Update repair comments successfully.", Toast.LENGTH_LONG).show();
+                Toast.makeText(IncidentDetailActivity.this, "Updated repair comments successfully.", Toast.LENGTH_LONG).show();
             }
             else
             {
-                Toast.makeText(IncidentDetailActivity.this, "Update repair comments failed.", Toast.LENGTH_LONG).show();
+                Toast.makeText(IncidentDetailActivity.this, "Updating repair comments failed.", Toast.LENGTH_LONG).show();
             }
             process.dismiss();
         }
@@ -548,8 +555,14 @@ public class IncidentDetailActivity extends Activity {
     private void showLargeImage(Bitmap bitmap){
         largeImage.setImageBitmap(bitmap);
         LayoutParams params = largeImage.getLayoutParams();
-        params.width = 600;
-        params.height = 450;
+        int width = bitmap.getWidth() > 1600 ? 1600 : bitmap.getWidth();
+        int height = bitmap.getWidth() > 1600 ? bitmap.getHeight() / (bitmap.getWidth()/1600) : bitmap.getHeight();
+        if(height > 800){
+            width = width / (height / 800);
+            height = 800;
+        }
+        params.width = width;
+        params.height = height;
         largeLayout.setVisibility(View.VISIBLE);
     }
 
@@ -696,11 +709,11 @@ public class IncidentDetailActivity extends Activity {
                             showLargeImage(bitmap);
                         }
                     });
-                    Toast.makeText(IncidentDetailActivity.this, "Upload photos successfully.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(IncidentDetailActivity.this, "Uploaded photos successfully.", Toast.LENGTH_LONG).show();
                 }
                 else
                 {
-                    Toast.makeText(IncidentDetailActivity.this, "Upload photos failed.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(IncidentDetailActivity.this, "Uploading photos failed.", Toast.LENGTH_LONG).show();
                 }
                 process.dismiss();
             }

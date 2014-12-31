@@ -583,7 +583,6 @@
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
-
     <RelativeLayout
         android:id="@+id/detail_largeLayout"
         android:layout_width="fill_parent"
@@ -591,18 +590,18 @@
         android:background="@color/gray3"
         android:visibility="gone"
         android:gravity="center">
-        <ImageView
-            android:id="@+id/detail_largeImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/property_logo"/>
-        <ImageView
-            android:id="@+id/detail_largeClose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@id/detail_largeImage"
-            android:layout_marginTop="-7dp"
-            android:layout_marginRight="-8dp"
-            android:src="@drawable/close"/>
+            <ImageView
+                android:id="@+id/detail_largeImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/property_logo"/>
+            <ImageView
+                android:id="@+id/detail_largeClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/detail_largeImage"
+                android:layout_marginTop="-7dp"
+                android:layout_marginRight="-7dp"
+                android:src="@drawable/close"/>
     </RelativeLayout>
 </RelativeLayout>

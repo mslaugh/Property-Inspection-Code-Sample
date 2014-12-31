@@ -1,25 +1,26 @@
 package com.canviz.repairapp;
 
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.util.Log;
-import android.widget.Toast;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.ImageView;
-import android.os.Handler;
+import android.widget.Toast;
+
 import com.canviz.repairapp.data.IncidentModel;
-import com.canviz.repairapp.utility.IncidentAdapter;
 import com.canviz.repairapp.utility.FileHelper;
+import com.canviz.repairapp.utility.IncidentAdapter;
+
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 public class IncidentActivity extends Activity {
@@ -57,7 +58,7 @@ public class IncidentActivity extends Activity {
                 else
                 {
                     process.dismiss();
-                    Toast.makeText(IncidentActivity.this, "The incident with ID "+ mApp.getIncidentId() +" did not find.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(IncidentActivity.this, "The incident with ID "+ mApp.getIncidentId() +" was not found.", Toast.LENGTH_LONG).show();
                 }
             }
         };
@@ -275,7 +276,7 @@ public class IncidentActivity extends Activity {
         intent.setType("plain/text");
         intent.putExtra( android.content.Intent.EXTRA_EMAIL, new String[] {to} );
         intent.putExtra( android.content.Intent.EXTRA_SUBJECT, "");
-        intent.putExtra(android.content.Intent.EXTRA_TEXT, "Send from android");
+        intent.putExtra(android.content.Intent.EXTRA_TEXT, "Sent from Android");
         Intent chooserIntent = Intent.createChooser(intent, "Send Email");
         startActivity(chooserIntent);
     }
