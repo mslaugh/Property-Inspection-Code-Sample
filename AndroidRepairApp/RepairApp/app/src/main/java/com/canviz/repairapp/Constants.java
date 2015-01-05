@@ -4,9 +4,9 @@ package com.canviz.repairapp;
  * Created by Max Liu on 11/28/2014.
  */
 public final class Constants {
-    public static final String SHAREPOINT_URL = "https://TENANCY.sharepoint.com";
+    public static final String SHAREPOINT_URL = "https://cd1.sharepoint.com";
     public static final String SHAREPOINT_SITE_PATH = "/sites/SuiteLevelAppDemo";
-    public static final String AAD_CLIENT_ID = "YOUR CLIENT ID";
+    public static final String AAD_CLIENT_ID = "893001c9-3622-4191-b189-c25c16c507e4";
     public static final String AAD_AUTHORITY = "https://login.windows.net/common";
     public static final String AAD_REDIRECT_URL = "http://PropertyManagementRepairApp";
     public static final String AAD_RESOURCE_ID = SHAREPOINT_URL;

@@ -28,7 +28,13 @@ public class ListHelper {
                 .expand(IncidentModel.EXPAND)
                 .top(1)
                 .orderBy("sl_date", QueryOrder.Descending)
-                .parameter("ID",incidentId);
+                .field("ID").eq(incidentId)
+                .and()
+                .field("sl_propertyIDId").gt(0)
+                .and()
+                .field("sl_inspectionIDId").gt(0)
+                .and()
+                .field("sl_roomIDId").gt(0);
         List<SPListItem> items = mClient.getListItems(Constants.LIST_NAME_INCIDENTS, query).get();
         if (items != null && items.size() > 0) {
             IncidentModel model = new IncidentModel(items.get(0));
@@ -44,7 +50,11 @@ public class ListHelper {
         Query query = new Query().select(IncidentModel.SELECT)
                 .expand(IncidentModel.EXPAND)
                 .orderBy("sl_date", QueryOrder.Descending)
-                .parameter("sl_propertyIDId",propertyId);
+                .field("sl_propertyIDId").eq(propertyId)
+                .and()
+                .field("sl_inspectionIDId").gt(0)
+                .and()
+                .field("sl_roomIDId").gt(0);
         List<SPListItem> items = mClient.getListItems(Constants.LIST_NAME_INCIDENTS, query).get();
 
         List<IncidentModel> models = new ArrayList<IncidentModel>();
@@ -60,7 +70,7 @@ public class ListHelper {
 
     public InspectionInspectorModel getInspection(int inspectionId) throws ExecutionException, InterruptedException {
         Query query = new Query().select(InspectionInspectorModel.SELECT)
-                .parameter("Id",String.valueOf(inspectionId))
+                .field("Id").eq(inspectionId)
                 .top(1)
                 .orderBy("sl_datetime", QueryOrder.Descending);
         List<SPListItem> items = mClient.getListItems(Constants.LIST_NAME_INSPECTIONS, query).get();
@@ -89,7 +99,7 @@ public class ListHelper {
     public int getPropertyPhotoId(int propertyId) throws ExecutionException, InterruptedException {
         String[] select = {"Id"};
         Query query = new Query().select(select)
-                .parameter("sl_propertyIDId", String.valueOf(propertyId))
+                .field("sl_propertyIDId").eq(propertyId)
                 .top(1)
                 .orderBy("Modified", QueryOrder.Descending);
         List<SPListItem> items = mClient.getListItems(Constants.LIST_NAME_PROPERTYPHOTOS, query).get();
@@ -102,9 +112,11 @@ public class ListHelper {
     public int getInspectionPhotoId(int incidentId,int roomId, int inspectionId,int top) throws ExecutionException, InterruptedException {
         String[] select = {"Id"};
         Query query = new Query().select(select)
-                .parameter("sl_inspectionIDId",String.valueOf(inspectionId))
-                .parameter("sl_incidentIDId",String.valueOf(incidentId))
-                .parameter("sl_roomIDId",String.valueOf(roomId))
+                .field("sl_inspectionIDId").eq(inspectionId)
+                .and()
+                .field("sl_incidentIDId").eq(incidentId)
+                .and()
+                .field("sl_roomIDId").eq(roomId)
                 .top(top)
                 .orderBy("Modified", QueryOrder.Descending);
         List<SPListItem> items = mClient.getListItems(Constants.LIST_NAME_ROOMINSPECTIONPHOTOS, query).get();
@@ -119,9 +131,11 @@ public class ListHelper {
         List<Integer> results = new ArrayList<Integer>();
         String[] select = {"Id"};
         Query query = new Query().select(select)
-                .parameter("sl_inspectionIDId",String.valueOf(inspectionId))
-                .parameter("sl_incidentIDId",String.valueOf(incidentId))
-                .parameter("sl_roomIDId",String.valueOf(roomId))
+                .field("sl_inspectionIDId").eq(inspectionId)
+                .and()
+                .field("sl_incidentIDId").eq(incidentId)
+                .and()
+                .field("sl_roomIDId").eq(roomId)
                 .orderBy("Modified", QueryOrder.Descending);
         List<SPListItem> items = mClient.getListItems(Constants.LIST_NAME_ROOMINSPECTIONPHOTOS, query).get();
         if(items != null && items.size() > 0){
@@ -136,9 +150,11 @@ public class ListHelper {
         List<Integer> results = new ArrayList<Integer>();
         String[] select = {"Id"};
         Query query = new Query().select(select)
-                .parameter("sl_inspectionIDId",String.valueOf(inspectionId))
-                .parameter("sl_incidentIDId",String.valueOf(incidentId))
-                .parameter("sl_roomIDId",String.valueOf(roomId))
+                .field("sl_inspectionIDId").eq(inspectionId)
+                .and()
+                .field("sl_incidentIDId").eq(incidentId)
+                .and()
+                .field("sl_roomIDId").eq(roomId)
                 .orderBy("Modified", QueryOrder.Descending);
         List<SPListItem> items = mClient.getListItems(Constants.LIST_NAME_REPAIRPHOTOS, query).get();
         if(items != null && items.size() > 0){
