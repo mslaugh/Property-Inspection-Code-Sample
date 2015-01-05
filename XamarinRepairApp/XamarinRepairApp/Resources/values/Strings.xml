@@ -14,7 +14,7 @@
     <string name="detail_inspection">INSPECTION DETAILS</string>
     <string name="finalize_btntext">Finalize Repair</string>
     <string name="dispatcher">DISPATCHER COMMENTS</string>
-    <string name="inspection">INSPECTION COMMENTS &amp; PHOTOS</string>
+    <string name="inspection">INSPECTOR COMMENTS &amp; PHOTOS</string>
     <string name="add_repair_comments">ADD REPAIR COMMENTS &amp; PHOTOS</string>
     <string name="title_activity_incident_detail">IncidentDetailActivity</string>
     <string name="detail_btnDoneText">Done</string>

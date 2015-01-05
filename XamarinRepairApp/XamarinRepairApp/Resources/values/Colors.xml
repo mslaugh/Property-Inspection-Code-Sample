@@ -8,7 +8,7 @@
     <color name="gray2">#4c4c4c</color>
     <color name="titleColor">#4b4b4b</color>
     <color name="valueColor">#313131</color>
-    <color name="leftBg">#eed8d8d8</color>
+    <color name="leftBg">#eeeeee</color>
     <color name="gray3">#b4747474</color>
     <color name="tr">#00000000</color>
 </resources>
