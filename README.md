@@ -10,6 +10,7 @@
 - [Cordova App Installation](#install-cordova)
 - [Xamarin App Installation](#install-xamarin)
 - [Mail App for Office Installation](#install-mailapp)
+- [Installing the MyApp on an Azure Web Site](#azure)
 - [Running the sample end to end](#running)
 - [API Notes](#apis)
 - [Mail App for Office Notes](#mailafo)
