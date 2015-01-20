@@ -703,6 +703,10 @@ The Mail App for Office runs on an ASP.NET Web site.  You must configure the Mai
 6. Select **Add from file**
 7. In the dialog select the **MailAppManifest.xml file** you created when you published the MailApp project
 8. Click **next**
+9. After the Mail App is uploaded, select it in the list.  It is named **Property Details**.
+10. Click the **Edit** button in the toolbar
+11. In the **Specify user defaults** section, select the **Optional, enabled by default** radio button
+12. Click **save**
  
 **Mail App for Office Installation Complete!**
 
