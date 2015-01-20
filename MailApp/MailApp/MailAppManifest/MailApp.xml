@@ -24,7 +24,7 @@
   <Permissions>ReadItem</Permissions>
   <Rule xsi:type="RuleCollection" Mode="Or">
     <Rule xsi:type="ItemIs" ItemType="Message"/>
-    <Rule xsi:type="ItemHasRegularExpressionMatch" PropertyName="Subject" RegExName="Repair" RegExValue="Repair This Incident"/>
+    <Rule xsi:type="ItemHasRegularExpressionMatch" PropertyName="BodyAsPlaintext" RegExName="Repair" RegExValue="Incident ID:(.*)"/>
   </Rule>
   <DisableEntityHighlighting>false</DisableEntityHighlighting>
 </OfficeApp>
