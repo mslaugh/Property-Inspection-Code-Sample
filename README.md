@@ -461,24 +461,26 @@ In the AndroidRepairApp folder you will find runnable sample code for Android Re
 
 To configure the Android Repair App follow these instructions.
 
-1. Open Android Studio.
-2. Import the Android Repair App you cloned from the GitHub repository.
-3. Open the **\RepairApp\app\src\main\java\com\canviz\repairapp\constants.java** file.
-4. Edit the **SHAREPOINT_URL** variable to match your O365 / Azure Tenancy by **replacing the TENANCY placeholder** with your tenancy name.  In the example below, the TENANCY placeholder was replaced with contoso.
+1. Open **Android Studio**.
+2. In the Quick Start menu, select **Import Non-Android Studio project**.
+3. Select the **AndroidRepairApp\RepairApp** directory you cloned from the GitHub repository.
+4. Click **OK**.
+5. Open the **\app\java\com.canviz.repairapp\Constants.java** file.
+6. Edit the **SHAREPOINT_URL** variable to match your O365 / Azure Tenancy by **replacing the TENANCY placeholder** with your tenancy name.  In the example below, the TENANCY placeholder was replaced with contoso.
 
 	**SHAREPOINT_URL** is the URL for the Site Collection created by the Property Manager My App.  Use the same value you configured in the web.config for the Property Manager My App for the DemoSiteCollectionUrl app setting.
 
     Example: contoso.onmicrosoft.com
 
-5. Edit the **DISPATCHEREMAIL** variable to match your O365 / Azure Tenancy by **replacing the TENANCY placeholder** with your tenancy name.  In the example below, the TENANCY placeholder was replaced with contoso.
+7. Edit the **DISPATCHEREMAIL** variable to match your O365 / Azure Tenancy by **replacing the TENANCY placeholder** with your tenancy name.  In the example below, the TENANCY placeholder was replaced with contoso.
 
 	**DISPATCHEREMAIL** is the email address for the dispatcher account you created.
 
     Example: katiej@contoso.onmicrosoft.com
 
-6. Edit the **AAD_CLIENT_ID** variable.  This is the Client ID value you copied and pasted in the steps above.  This value is also displayed in the CONFIGURE page for the PropertyManagementRepairApp Azure Active Directory Application in the Azure Management Portal.
+8. Edit the **AAD_CLIENT_ID** variable.  This is the Client ID value you copied and pasted in the steps above.  This value is also displayed in the CONFIGURE page for the PropertyManagementRepairApp Azure Active Directory Application in the Azure Management Portal.
 
-7. Edit the **AAD_REDIRECT_URL** variable.  This is the Redirect URI value you copied and pasted in the steps above.  This value is also displayed in the CONFIGURE page for the PropertyManagementRepairApp Azure Active Directory Application in the Azure Management Portal.
+9. Edit the **AAD_REDIRECT_URL** variable.  This is the Redirect URI value you copied and pasted in the steps above.  This value is also displayed in the CONFIGURE page for the PropertyManagementRepairApp Azure Active Directory Application in the Azure Management Portal.
 
 **Set Up Android Virtual Device**
 The Android Repair App targets the Nexus 9 device.  These steps describe how to configure an Android Virtual Device that replicates the Nexus 9.
@@ -500,8 +502,9 @@ The Android Repair App targets the Nexus 9 device.  These steps describe how to 
 
 **Run the Repair App on the Nexus 9 Android Virtual Device**
 
-5. In Android Studio, click the **green arrow** to run the application.
-6. Select the **Nexus 9 Android Virtual Device** you already started and click **OK**.
+1. In Android Studio, click the **Run** menu and select **Run app**.
+2. Select the **Nexus 9 Android Virtual Device** you already started
+3. Click **OK**.
 
 	![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/Select Nexus 9 AVD.png)
 
@@ -509,7 +512,7 @@ The Sign in screen will appear and you can now use the Android Repair App during
 
 **Android Repair App Installation Complete!**
 
-## Install-cordova
+## Install-Cordova
 
 The mobile Repair App in the demo may also be run on Cordova in addition to the iOS version. The Cordova version of the Repair App is written in HTML, JavaScript and CSS.  It uses the Knockout.js framework for data binding.
 
