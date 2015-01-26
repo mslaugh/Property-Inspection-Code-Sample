@@ -95,28 +95,23 @@ namespace SuiteLevelWebApp.Utils
                          mailNickname = column.InnerText;
                      }
                  }
-
                  Group newgroup = await GetGroup(displayName);
-                 if(newgroup!=null)
+                 if (newgroup == null)
                  {
-                     await newgroup.DeleteAsync();
+                     newgroup = new Microsoft.Azure.ActiveDirectory.GraphClient.Group
+                     {
+                         DisplayName = displayName,
+                         Description = description,
+                         MailNickname = mailNickname,
+                         MailEnabled = false,
+                         SecurityEnabled = true
+                     };
+                     await this.client.Groups.AddGroupAsync(newgroup);
                  }
-
-                 newgroup = new Microsoft.Azure.ActiveDirectory.GraphClient.Group
-                 {
-                     DisplayName = displayName,
-                     Description = description,
-                     MailNickname = mailNickname,
-                     MailEnabled = false,
-                     SecurityEnabled = true
-                 };
-
-                 await this.client.Groups.AddGroupAsync(newgroup);
                  this.groupsDict.Add(newgroup.DisplayName, newgroup);
              }
             return;
         }
-
         private async Task ParserXmlAndCreateADUsers(XmlDocument sampleData, String defaultDomainValue)
         {
             XmlNode items = sampleData.SelectSingleNode("//List[@name='AD Users']");
@@ -150,18 +145,15 @@ namespace SuiteLevelWebApp.Utils
                         groups = column.InnerText;
                     }
                 }
-
                 User newUser = await GetUser(userPrincipalName + "@" + defaultDomainValue);
-                if(newUser!=null)
+                if (newUser == null)
                 {
-                    await newUser.DeleteAsync();
+                    newUser = await this.CreateUser(displayName,
+                              userPrincipalName + "@" + defaultDomainValue,
+                              mailNickname, password);
                 }
-
-                newUser = await this.CreateUser(displayName, 
-                                              userPrincipalName + "@" + defaultDomainValue,
-                                              mailNickname, password);
-
-                if(groups!=null)
+                
+                if (groups != null)
                 {
                     string[] grounpsID = groups.Split(',');
                     foreach (string groupDisplayName in grounpsID)
@@ -169,25 +161,19 @@ namespace SuiteLevelWebApp.Utils
                         if(groupDisplayName.Length>0)
                         {
                             Group group = this.groupsDict[groupDisplayName];
-                            
-                            if(group!=null)
+                            if(group == null)
+                            {
+                                group = await GetGroup(groupDisplayName);
+                            }
+                            if(group!=null && !(await CheckUserWhetherExsitADGroup(newUser,group)))
                             {
                                 await this.AddUserToGroup(newUser, group);
                             }
-                            else
-                            {
-                                group = await GetGroup(groupDisplayName);
-                                if(group!=null)
-                                {
-                                    await this.AddUserToGroup(newUser, group);
-                                }
-                            }
                         }
                     }
-                }                
+                }
             }
         }
-
         private async Task<User> CreateUser(String displayName, String userPrincipalName, String mailNickname, String password)
         {
             User newUser = new User();
@@ -338,6 +324,37 @@ namespace SuiteLevelWebApp.Utils
         //    }
         //    return;
         //}
+
+        private async Task<bool> CheckUserWhetherExsitADGroup(User user, Group group)
+        {
+            if (group.ObjectId != null)
+            {
+                IGroupFetcher retrievedGroupFetcher = group;
+                IPagedCollection<IDirectoryObject> membersPagedCollection = await retrievedGroupFetcher.Members.ExecuteAsync();
+                if (membersPagedCollection != null)
+                {
+                    do
+                    {
+                        List<IDirectoryObject> templist = membersPagedCollection.CurrentPage.ToList();
+                        foreach (IDirectoryObject member in templist)
+                        {
+                            if (member is User)
+                            {
+                                User usertemp = member as User;
+                                if (usertemp.UserPrincipalName.Equals(user.UserPrincipalName))
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+                        membersPagedCollection = await membersPagedCollection.GetNextPageAsync();
+                    } while (membersPagedCollection != null && membersPagedCollection.MorePagesAvailable);
+
+                }
+
+            }
+            return false;
+        }
 
         private async Task<bool> CheckUserWhetherExsitADGroup(String userPrincipalName, string groupName)
         {
