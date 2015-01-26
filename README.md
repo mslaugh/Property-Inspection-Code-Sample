@@ -237,10 +237,11 @@ Finally, you will create the Azure Active Directory Groups, Users, and demo data
 - Repair Person: Chris Gray alias: chrisg
 - Property Owner: Steven Wright alias: stevenw
 
-**Note:**  If your tenancy does not support multiple users because you do not have 7 licenses available you can run the demo with a single user account.  In this case, the account must meet the following requirements:
+**Running Demo With A Single User Account**  If your tenancy does not support multiple users because you do not have 7 licenses available you can run the demo with a single user account.  In this case, the account must meet the following requirements:
 
 	- User is a global tenant admin
 	- User is is granted the licenses necessary to support the scenario (See the Grant Licenses section below for more details)
+	- User is added to the Inspectors and Repair People Azure Active Directory Groups
 
 Additionally, in a single user scenario, the accounts set in the web.config file for the My App, as well as all the configuration variables for all the mobile apps should use the single user account. 
 
