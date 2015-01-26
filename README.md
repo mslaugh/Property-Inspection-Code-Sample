@@ -238,6 +238,7 @@ Finally, you will create the Azure Active Directory Groups, Users, and demo data
 - Property Owner: Steven Wright alias: stevenw
 
 	**Running Demo With A Single User Account** 
+
 	If your tenancy does not support multiple users because you do not have 7 licenses available you can run the demo with a single user account.  In this case, the account must meet the following requirements:
 	
 	- User is a global tenant admin
