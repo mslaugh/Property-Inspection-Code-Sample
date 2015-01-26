@@ -274,7 +274,17 @@ You will need to specify a new password for each user the first time you log in 
 Next, you must grant licenses to the Active Directory User Accounts.
 
 1. Open the O365 admin app.
-2. Grant licenses to all the accounts.
+2. Expand the **USERS** menu and select **Active Users**.
+3. For each user in the list below, perform the following actions.
+4. Select the user by clicking the **checkbox** next to the user's Name.
+5. Click the **edit** link in the **Assigned license** section on the right portion of the page.
+6. Select a license for the user by clicking the **checkbox** next to the available license.
+7. Expand the license to show the different capbilities the license offers.
+8. Select the **Office Online**, **Office 365 Business**, **Exchange Online**, and **SharePoint Online** checkboxes.
+
+	![](https://raw.githubusercontent.com/OfficeDev/Property-Inspection-Code-Sample/master/Documents/licenses.jpg)
+
+9. Click **SAVE**.
 
 - Rob Barker alias: robb
 - Katie Jordan alias: katiej
