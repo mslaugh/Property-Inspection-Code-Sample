@@ -237,6 +237,13 @@ Finally, you will create the Azure Active Directory Groups, Users, and demo data
 - Repair Person: Chris Gray alias: chrisg
 - Property Owner: Steven Wright alias: stevenw
 
+**Note:**  If your tenancy does not support multiple users because you do not have 7 licenses available you can run the demo with a single user account.  In this case, the account must meet the following requirements:
+
+	- User is a global tenant admin
+	- User is is granted the licenses necessary to support the scenario (See the Grant Licenses section below for more details)
+
+Additionally, in a single user scenario, the accounts set in the web.config file for the My App, as well as all the configuration variables for all the mobile apps should use the single user account. 
+
 8. Next, click the **Create Sample Data** link in the top menu.  Then, click the **Populate** button.
 
 9. Enter the date when you plan to execute the demo, then click the **Populate** button.
@@ -272,7 +279,7 @@ You will need to specify a new password for each user the first time you log in 
 
 **Grant Licenses**
 
-Next, you must grant licenses to the Active Directory User Accounts.
+Next, you must grant licenses to the Active Directory User Accounts.  This must be done manually because currently no APIs exist to automate this process.
 
 1. Open the O365 admin app.
 2. Expand the **USERS** menu and select **Active Users**.
