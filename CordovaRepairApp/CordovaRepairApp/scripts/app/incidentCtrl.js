@@ -34,7 +34,22 @@
 
             //here we need loaddata
             this.blockLoadingUI("#listloadingui");
-            this.loadPropertyIdByIncidentId();
+            this.getIncidentFirstId();
+        },
+
+        getIncidentFirstId:function(){
+            var url = O365Auth.Settings.sitecollectionUrl + "/_api/lists/GetByTitle('Incidents')/Items?$select=ID&$orderby=ID asc&$top=1";
+            listClient.getListItems(url,
+                (function (listitems) {
+                    if (listitems.length > 0) {
+                        incidentCtrl.incidentId = (listitems[0])["ID"];
+                        this.loadPropertyIdByIncidentId();
+                    }
+                    else {
+                        this.displayMessageAlert("Can't find Incidents list item.");
+                    }
+                }).bind(this),
+                (this.loadListFail).bind(this));
 
         },
 
