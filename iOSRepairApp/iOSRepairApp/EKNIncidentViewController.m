@@ -54,7 +54,17 @@
     [self addPropertyDetailTable];
     [self addRightTable];
     [self addIncidentDetailView];
-    [self loadPropertyIdByIncidentId];
+    
+   
+    if(self.incidentId == nil)
+    {
+        [self getIncidentFirstId];
+    }
+    else
+    {
+        [self loadPropertyIdByIncidentId];
+    }
+    
 }
 
 -(void)initData
@@ -71,7 +81,13 @@
     
     self.detailViewIsShowing = NO;
 }
-
+-(void)addSpinner{
+    self.spinner = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(0,0,1024,768)];
+    self.spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    [self.spinner setBackgroundColor:[UIColor colorWithRed:0.00f/255.00f green:0.00f/255.00f blue:0.00f/255.00f alpha:0.6]];
+    [self.view addSubview:self.spinner];
+    self.spinner.hidesWhenStopped = YES;
+}
 -(void)addPropertyDetailTable{
     
     self.propertyDetailTableView = [[UITableView alloc] initWithFrame:CGRectMake(25, 100, 315, 349) style:UITableViewStyleGrouped];
@@ -541,11 +557,6 @@
 
 -(void)showLoading
 {
-    self.spinner = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(0,0,1024,768)];
-    self.spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-    [self.spinner setBackgroundColor:[UIColor colorWithRed:0.00f/255.00f green:0.00f/255.00f blue:0.00f/255.00f alpha:0.6]];
-    [self.view addSubview:self.spinner];
-    self.spinner.hidesWhenStopped = YES;
     [self.spinner startAnimating];
 }
 
@@ -627,6 +638,26 @@
 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
+}
+-(void)getIncidentFirstId{
+    [self showLoading];
+    NSString *filter = @"$select=ID&$orderby=ID asc&$top=1";
+    NSString *filterStr = [filter stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    [self.client getListItemsByFilter:@"Incidents" filter:filterStr callback:^(NSMutableArray *listItems, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(listItems != nil && [listItems count] >0)
+            {
+                EKNListItem *item = listItems[0];
+                self.incidentId = (NSString *)[item getData:@"ID"];
+                [self loadPropertyIdByIncidentId];
+            }
+            else
+            {
+                [self hideLoading];
+                [self showErrorMessage:@"Can't find Incidents list item."];
+            }
+        });
+    }];
 }
 
 -(void)loadPropertyIdByIncidentId{

@@ -242,7 +242,8 @@
                     
                     if(self.incidentId == nil || (NSNull *)self.incidentId == [NSNull null])
                     {
-                        incident.incidentId = @"1";
+                        incident.incidentId = nil;
+                        
                     }
                     else
                     {
