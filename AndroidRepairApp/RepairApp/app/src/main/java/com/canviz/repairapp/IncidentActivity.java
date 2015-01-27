@@ -42,11 +42,59 @@ public class IncidentActivity extends Activity {
         this.listView = (ListView)findViewById(R.id.incident_list);
         this.propertyLogo = (ImageView)findViewById(R.id.incident_propertyLogo);
 
-        loadPropertyId();
+        if(mApp.getIncidentId().equals("0")){
+            process = ProgressDialog.show(this,"Loading","Loading data from SharePoint List...");
+            loadFirstIncidentId();
+        }
+        else {
+            process = ProgressDialog.show(this,"Loading","Loading data from SharePoint List...");
+            loadPropertyId();
+        }
+    }
+
+    private void loadFirstIncidentId(){
+        final Handler loadFirstIncidentIdHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if(msg.what == Constants.SUCCESS)
+                {
+                    mApp.setIncidentId(String.valueOf(msg.obj));
+                    loadPropertyId();
+                }
+                else
+                {
+                    process.dismiss();
+                    Toast.makeText(IncidentActivity.this, "There is no incident.", Toast.LENGTH_LONG).show();
+                }
+            }
+        };
+
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    IncidentModel tempModel = mApp.getDataSource().getIncidentId();
+                    if(tempModel != null){
+                        Message message = new Message();
+                        message.what = Constants.SUCCESS;
+                        message.obj = tempModel.getId();
+                        loadFirstIncidentIdHandler.sendMessage(message);
+                    }
+                    else{
+                        throw new Exception();
+                    }
+                } catch (Exception e) {
+                    Message message = new Message();
+                    message.what = Constants.FAILED;
+                    message.obj = e.getMessage();
+                    loadFirstIncidentIdHandler.sendMessage(message);
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
     private void loadPropertyId(){
-        process = ProgressDialog.show(this,"Loading","Loading data from SharePoint List...");
         final Handler loadPropertyIdHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {

@@ -23,6 +23,27 @@ public class ListHelper {
         mClient = client;
     }
 
+    public IncidentModel getIncidentId() throws ExecutionException, InterruptedException{
+        Query query = new Query().select(IncidentModel.SELECT)
+                .expand(IncidentModel.EXPAND)
+                .top(1)
+                .orderBy("ID", QueryOrder.Ascending)
+                .field("sl_propertyIDId").gt(0)
+                .and()
+                .field("sl_inspectionIDId").gt(0)
+                .and()
+                .field("sl_roomIDId").gt(0);
+        List<SPListItem> items = mClient.getListItems(Constants.LIST_NAME_INCIDENTS, query).get();
+        if (items != null && items.size() > 0) {
+            IncidentModel model = new IncidentModel(items.get(0));
+            if(model.getPropertyId() > 0 && model.getInspectionId() > 0 && model.getRoomId() > 0)
+            {
+                return model;
+            }
+        }
+        return null;
+    }
+
     public IncidentModel getIncident(String incidentId) throws ExecutionException, InterruptedException{
         Query query = new Query().select(IncidentModel.SELECT)
                 .expand(IncidentModel.EXPAND)

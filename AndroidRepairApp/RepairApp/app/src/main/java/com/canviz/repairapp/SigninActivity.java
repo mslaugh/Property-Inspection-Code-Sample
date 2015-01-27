@@ -54,7 +54,7 @@ public class SigninActivity extends Activity {
     }
 
     private void setIncidentId(){
-        String incidentId = "25";
+        String incidentId = "0";
         try{
             Intent intent = this.getIntent();
             Uri uri = intent.getData();
@@ -67,7 +67,7 @@ public class SigninActivity extends Activity {
                 }
             }
         }catch(Exception e){
-            incidentId = "25";
+            incidentId = "0";
         }
         mApp.setIncidentId(incidentId);
     }
